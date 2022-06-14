@@ -1,0 +1,68 @@
+/**
+ * @file: style.css
+ * @authors: Gabriele Bovolenta, Luna Diatto, Eloise Giorda, Marco Parisi, Diego Vaschetto
+ * @project: Expiry List
+ * 
+ * This file contains the CSS applied to the index.html page
+ */
+
+body {
+    background: url("../images/arance.jpeg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    box-sizing: border-box;
+}
+
+section {
+    text-align: left;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+  
+section h1 {
+    text-transform: uppercase;
+    font-size: 80px;
+    color: #755D2F;
+    font-weight: 500;
+}
+  
+section h1 span {
+    font-weight: 600;
+    color: #F7C363;
+}
+  
+section h3 {
+    font-size: 60px;
+    color: #755D2F;
+    font-weight: 700;
+}
+  
+section div p {
+    font-size: 30px;
+    font-weight: 200;
+    color: rgba(255, 255, 255, 0.801);
+}
+  
+section div ul {
+    list-style-type: square;
+    padding-left: 50px;
+    padding-top: 15px;
+    font-size: 30px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.801);
+}
+  
+section button {
+    background-color: #755d2fa1;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 700;
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    font-size: 30px;
+    padding: 20px 40px;
+    margin-top: 40px;
+    cursor: pointer;
+}
