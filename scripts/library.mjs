@@ -303,10 +303,10 @@ let paddingDate = (d, lang) => {
   return days;
 };
 
-
-export let print = (products, lang) => {
+// NEW FUNCTIONS
+export let print = (tableClass, lang) => {
   globalArrayItems.forEach((element) => {
-    let table = document.querySelector(products);
+    let table = document.querySelector(tableClass);
     let tr = document.createElement("tr");
     for (let key in element) {
       let td = document.createElement("td");
@@ -327,10 +327,10 @@ export let createTable = (tableClass, dateWeek, lang) => {
   let title = document.createElement("h5");
   let table = document.createElement("table");
   table.setAttribute("class", tableClass);
+  title.setAttribute("class", `title-${tableClass}`);
   if (tableClass.includes("filtered-products") === true) {
     title.textContent = "Products filtered";
   } else {
-    console.log(tableClass)
     title.textContent = "Week of " + paddingDate(dateWeek, lang);
   }
   let tr = document.createElement("tr");
@@ -338,9 +338,14 @@ export let createTable = (tableClass, dateWeek, lang) => {
   for (let key in keys) {
     let th = document.createElement("th");
     th.textContent = keys[key];
+    th.setAttribute("class", keys[key]);
     tr.appendChild(th);
   }
   table.appendChild(tr);
   document.body.appendChild(title);
   document.body.appendChild(table);
+  if (tableClass.includes("products-0") === true) {
+    table.classList.add("active");
+    title.classList.add("active");
+  }
 };

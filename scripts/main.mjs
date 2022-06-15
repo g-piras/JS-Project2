@@ -26,3 +26,57 @@ import * as fn from "./library.mjs"; // functions used in the program
     cnf.startWeek.setDate(cnf.startWeek.getDate() + cnf.dayWeek);
   }
 })();
+
+let arrowLeft = document.querySelector(".arrow-left");
+let arrowRight = document.querySelector(".arrow-right");
+let i = 0;
+
+arrowLeft.onclick = () => {
+  if (i === 0) {
+    i = cnf.runWeeks - 1;
+  } else {
+    i--;
+  }
+  let table = document.querySelector(`.products-${i}`);
+  let filterTable = document.querySelector(`.filtered-products-${i}`);
+  let title = document.querySelector(`.title-products-${i}`);
+  let filterTitle = document.querySelector(`.title-filtered-products-${i}`);
+
+  let allTitles = document.querySelectorAll("h5");
+  let allTables = document.querySelectorAll("table");
+
+  allTables.forEach((element) => element.classList.remove("active"));
+  allTitles.forEach((element) => element.classList.remove("active"));
+
+  table.classList.add("active");
+  title.classList.add("active");
+  filterTable.classList.add("active");
+  filterTitle.classList.add("active");
+
+  return i;
+};
+
+arrowRight.onclick = () => {
+  if (i === cnf.runWeeks-1) {
+    i = 0;
+  } else {
+    i++;
+  }
+  let table = document.querySelector(`.products-${i}`);
+  let filterTable = document.querySelector(`.filtered-products-${i}`);
+  let title = document.querySelector(`.title-products-${i}`);
+  let filterTitle = document.querySelector(`.title-filtered-products-${i}`);
+
+  let allTitles = document.querySelectorAll("h5");
+  let allTables = document.querySelectorAll("table");
+
+  allTables.forEach((element) => element.classList.remove("active"));
+  allTitles.forEach((element) => element.classList.remove("active"));
+
+  table.classList.add("active");
+  title.classList.add("active");
+  filterTable.classList.add("active");
+  filterTitle.classList.add("active");
+
+  return i;
+};
