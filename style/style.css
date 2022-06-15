@@ -6,63 +6,29 @@
  * This file contains the CSS applied to the index.html page
  */
 
-body {
-    background: url("../images/arance.jpeg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    box-sizing: border-box;
+table {
+    margin: 10px auto;
+    width: 80%;
+    vertical-align: middle;
+    border: 1px solid #1c1c1c;
 }
 
-section {
-    text-align: left;
-    margin-left: 5%;
-    margin-right: 5%;
+table tr th, table tr th {
+    background-color: orange;
+    padding: 5px;
+    text-align: center;
 }
-  
-section h1 {
-    text-transform: uppercase;
-    font-size: 80px;
-    color: #755D2F;
-    font-weight: 500;
+
+table tr td {
+    padding: 5px;
+    text-align: center;
 }
-  
-section h1 span {
-    font-weight: 600;
-    color: #F7C363;
+
+table tr:nth-child(even) td {
+    background-color: #ccc;
 }
-  
-section h3 {
-    font-size: 60px;
-    color: #755D2F;
-    font-weight: 700;
-}
-  
-section div p {
-    font-size: 30px;
-    font-weight: 200;
-    color: rgba(255, 255, 255, 0.801);
-}
-  
-section div ul {
-    list-style-type: square;
-    padding-left: 50px;
-    padding-top: 15px;
-    font-size: 30px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.801);
-}
-  
-section button {
-    background-color: #755d2fa1;
-    color: rgba(255, 255, 255, 0.8);
-    font-weight: 700;
-    border: none;
-    outline: none;
-    text-transform: uppercase;
-    font-size: 30px;
-    padding: 20px 40px;
-    margin-top: 40px;
-    cursor: pointer;
+
+h5 {
+    text-align: center;
+    font-size: 16px;
 }

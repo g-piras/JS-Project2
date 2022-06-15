@@ -36,7 +36,4 @@ export const configurationObject = {
   //we will print every week with a random delay, between the minimum and maximum seconds below
   minUpdateListSeconds: 3,
   maxUpdateListSeconds: 6,
-
-  //the padding character used for the padding of the output
-  paddingCharacter: ".",
 };
