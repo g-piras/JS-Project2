@@ -16,35 +16,43 @@ import * as fn from "./library.mjs"; // functions used in the program
   for (let i = 0; i < cnf.runWeeks; i++) {
     fn.createTable(`products-${i}`, cnf.startWeek, cnf.language);
     fn.createTable(`filtered-products-${i}`, cnf.startWeek, cnf.language);
-    for (let j = 0; j < cnf.newItems; j++) {
-      fn.createNewItem(cnf.startWeek, cnf.maxExpDate);
-    }
-    fn.changeStatus(cnf.startWeek, cnf.itemLifeSpan);
-    fn.print(`.products-${i}`, cnf.language);
-    fn.removeItem();
-    fn.print(`.filtered-products-${i}`, cnf.language);
+    fn.createNewWeek(cnf.startWeek, cnf.maxExpDate, cnf.newItems, i, cnf.runWeeks);
+    fn.changeStatus(cnf.startWeek, cnf.itemLifeSpan, fn.globalArrayItems[i]);
+    fn.print(`.products-${i}`, cnf.language, fn.globalArrayItems[i]);
+    fn.createCopyGlobalArray(i);
+    fn.removeItem(fn.globalArrayItems[i]);
+    fn.createCopyGlobalArrayFiltered(i);
+    fn.print(`.filtered-products-${i}`, cnf.language, fn.globalArrayItems[i]);
     cnf.startWeek.setDate(cnf.startWeek.getDate() + cnf.dayWeek);
   }
-})();
-
-// BUTTON MOVE NEXT WEEK
+  console.log(fn.globalArrayItems);
+  console.log(fn.globalArrayItemsCopy);
+  console.log(fn.globalArrayItemsCopyFiltered)
+  // BUTTON MOVE NEXT WEEK
 let arrowLeft = document.querySelector(".arrow-left");
 let arrowRight = document.querySelector(".arrow-right");
-let i = 0;
+let index = 0;
+arrowLeft.addEventListener("click", () =>{
+  goPreviousWeek(cnf.runWeeks);
+});
+arrowRight.addEventListener("click", () =>{
+  goNextWeek(cnf.runWeeks);
+});
 
-arrowLeft.onclick = () => {
-  i--;
-  if (i === 0) {
+//BUTTON HANDLER
+const goPreviousWeek = (weekNumber) => {
+  index--;
+  if (index === 0) {
     arrowLeft.setAttribute("disabled", "disabled");
   } else {
-    if (i === cnf.runWeeks - 2) {
+    if (index === weekNumber - 2) {
       arrowRight.removeAttribute("disabled");
     }
   }
-  let table = document.querySelector(`.products-${i}`);
-  let filterTable = document.querySelector(`.filtered-products-${i}`);
-  let title = document.querySelector(`.title-products-${i}`);
-  let filterTitle = document.querySelector(`.title-filtered-products-${i}`);
+  let table = document.querySelector(`.products-${index}`);
+  let filterTable = document.querySelector(`.filtered-products-${index}`);
+  let title = document.querySelector(`.title-products-${index}`);
+  let filterTitle = document.querySelector(`.title-filtered-products-${index}`);
 
   let allTitles = document.querySelectorAll("h5");
   let allTables = document.querySelectorAll("table");
@@ -57,22 +65,22 @@ arrowLeft.onclick = () => {
   filterTable.classList.add("active");
   filterTitle.classList.add("active");
 
-  return i;
+  return index;
 };
 
-arrowRight.onclick = () => {
-  i++;
-  if (i === cnf.runWeeks - 1) {
+const goNextWeek = (weekNumber) => {
+  index++;
+  if (index === weekNumber - 1) {
     arrowRight.setAttribute("disabled", "disabled");
   } else {
-    if (i === 1) {
+    if (index === 1) {
       arrowLeft.removeAttribute("disabled");
     }
   }
-  let table = document.querySelector(`.products-${i}`);
-  let filterTable = document.querySelector(`.filtered-products-${i}`);
-  let title = document.querySelector(`.title-products-${i}`);
-  let filterTitle = document.querySelector(`.title-filtered-products-${i}`);
+  let table = document.querySelector(`.products-${index}`);
+  let filterTable = document.querySelector(`.filtered-products-${index}`);
+  let title = document.querySelector(`.title-products-${index}`);
+  let filterTitle = document.querySelector(`.title-filtered-products-${index}`);
 
   let allTitles = document.querySelectorAll("h5");
   let allTables = document.querySelectorAll("table");
@@ -85,10 +93,13 @@ arrowRight.onclick = () => {
   filterTable.classList.add("active");
   filterTitle.classList.add("active");
 
-  return i;
+  return index;
 };
+})();
 
-// BONUS ONE CATEGORY SORTING
+
+
+/* // BONUS ONE CATEGORY SORTING
 let idProduct = document.querySelector(".ID");
 let nameProduct = document.querySelector(".Name");
 let statusProduct = document.querySelector(".Status");
@@ -97,3 +108,4 @@ let checkProduct = document.querySelector(".Check");
 
 
 statusProduct.addEventListener("click", sortByStatus);
+ */

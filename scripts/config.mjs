@@ -32,8 +32,4 @@ export const configurationObject = {
 
   //the number of days used to delay the current date (current date + startingDate = starting date of the program)
   startingDate: 10,
-
-  //we will print every week with a random delay, between the minimum and maximum seconds below
-  minUpdateListSeconds: 3,
-  maxUpdateListSeconds: 6,
 };
