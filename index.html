@@ -41,28 +41,28 @@
         <div class="settings-panel">
             <div class="box-input">
                 <label for="start-date">Start date:</label>
-                <input type="date" id="start-date" name="start-date"/>
+                <input type="date" id="start-date" name="start-date" required/>
                 <label for="days-to-wait">Days to wait:</label>
-                <input type="number" id="days-to-wait" name="days-to-wait"/>
+                <input type="number" id="days-to-wait" name="days-to-wait" required/>
             </div>
                 
             <div class="box-input">
                 <label for="weeks">Weeks:</label>
-                <input type="number" id="weeks" name="weeks"/>
+                <input type="number" id="weeks" name="weeks" min="1" required/>
                 <label for="items-per-week">Items per week:</label>
-                <input type="number" id="items-per-week" name="items-per-week"/>
+                <input type="number" id="items-per-week" name="items-per-week" min="1" required/>
             </div>
         
             <div class="box-input">
                 <label for="item-week-life">Item week life:</label>
-                <input type="number" id="item-week-life" name="item-week-life"/>
+                <input type="number" id="item-week-life" name="item-week-life" min="1" required/>
                 <label for="language">Language</label>
                 <select name="language" id="language">
                     <option value="english">English</option>
                     <option value="italian">Italian</option>
                 </select>
                 <!--button to save settings-->
-                <input type="submit" value="Save settings" id="submit-button"/>
+                <input type="submit" value="Save settings" id="submit-button" required/>
             </div>  
         </div>
 
