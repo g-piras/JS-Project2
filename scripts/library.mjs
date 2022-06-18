@@ -198,15 +198,14 @@ export let createNewWeek = (startingDate, maxExpDate, itemsNum, index) => {
 };
 
 export let createCopyGlobalArray = (index) => {
-      const WeekClone = JSON.parse(JSON.stringify(globalArrayItems[index]));
-      globalArrayItemsCopy.push(WeekClone); 
-}
+  const WeekClone = JSON.parse(JSON.stringify(globalArrayItems[index]));
+  globalArrayItemsCopy.push(WeekClone);
+};
 
 export let createCopyGlobalArrayFiltered = (index) => {
-      const WeekClone = JSON.parse(JSON.stringify(globalArrayItems[index]));
-      globalArrayItemsCopyFiltered.push(WeekClone); 
-}
-
+  const WeekClone = JSON.parse(JSON.stringify(globalArrayItems[index]));
+  globalArrayItemsCopyFiltered.push(WeekClone);
+};
 
 /**
  * Function that creates the object item and places it inside the global array of items
@@ -233,7 +232,6 @@ let createNewItem = (startingDate, maxExpDate) => {
  */
 export let changeStatus = (startWeek, itemLife, week) => {
   week.forEach((item) => {
-/*     console.log(item.expirationDate + "  /  " + item.check + item.name); */
     if (startWeek.getTime() > item.expirationDate.getTime()) {
       item.status = "expired";
     } else {
@@ -375,4 +373,16 @@ export let createTable = (tableClass, dateWeek, lang) => {
   }
 };
 
-
+export const changePrint = (tableClass, week) => {
+  let table = document.querySelector(tableClass);
+  table.textContent = "";
+  week.forEach((element) => {
+    let tr = document.createElement("tr");
+    for (let key in element) {
+      let td = document.createElement("td");
+      td.textContent = element[key];
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
+  });
+};

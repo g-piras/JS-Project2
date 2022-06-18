@@ -16,7 +16,13 @@ import * as fn from "./library.mjs"; // functions used in the program
   for (let i = 0; i < cnf.runWeeks; i++) {
     fn.createTable(`products-${i}`, cnf.startWeek, cnf.language);
     fn.createTable(`filtered-products-${i}`, cnf.startWeek, cnf.language);
-    fn.createNewWeek(cnf.startWeek, cnf.maxExpDate, cnf.newItems, i, cnf.runWeeks);
+    fn.createNewWeek(
+      cnf.startWeek,
+      cnf.maxExpDate,
+      cnf.newItems,
+      i,
+      cnf.runWeeks
+    );
     fn.changeStatus(cnf.startWeek, cnf.itemLifeSpan, fn.globalArrayItems[i]);
     fn.print(`.products-${i}`, cnf.language, fn.globalArrayItems[i]);
     fn.createCopyGlobalArray(i);
@@ -27,85 +33,94 @@ import * as fn from "./library.mjs"; // functions used in the program
   }
   console.log(fn.globalArrayItems);
   console.log(fn.globalArrayItemsCopy);
-  console.log(fn.globalArrayItemsCopyFiltered)
+  console.log(fn.globalArrayItemsCopyFiltered);
   // BUTTON MOVE NEXT WEEK
-let arrowLeft = document.querySelector(".arrow-left");
-let arrowRight = document.querySelector(".arrow-right");
-let index = 0;
-arrowLeft.addEventListener("click", () =>{
-  goPreviousWeek(cnf.runWeeks);
-});
-arrowRight.addEventListener("click", () =>{
-  goNextWeek(cnf.runWeeks);
-});
+  let arrowLeft = document.querySelector(".arrow-left");
+  let arrowRight = document.querySelector(".arrow-right");
+  let index = 0;
+  arrowLeft.addEventListener("click", () => {
+    goPreviousWeek(cnf.runWeeks);
+  });
+  arrowRight.addEventListener("click", () => {
+    goNextWeek(cnf.runWeeks);
+  });
 
-//BUTTON HANDLER
-const goPreviousWeek = (weekNumber) => {
-  index--;
-  if (index === 0) {
-    arrowLeft.setAttribute("disabled", "disabled");
-  } else {
-    if (index === weekNumber - 2) {
-      arrowRight.removeAttribute("disabled");
+  //BUTTON HANDLER
+  const goPreviousWeek = (weekNumber) => {
+    index--;
+    if (index === 0) {
+      arrowLeft.setAttribute("disabled", "disabled");
+    } else {
+      if (index === weekNumber - 2) {
+        arrowRight.removeAttribute("disabled");
+      }
     }
-  }
-  let table = document.querySelector(`.products-${index}`);
-  let filterTable = document.querySelector(`.filtered-products-${index}`);
-  let title = document.querySelector(`.title-products-${index}`);
-  let filterTitle = document.querySelector(`.title-filtered-products-${index}`);
+    let table = document.querySelector(`.products-${index}`);
+    let filterTable = document.querySelector(`.filtered-products-${index}`);
+    let title = document.querySelector(`.title-products-${index}`);
+    let filterTitle = document.querySelector(
+      `.title-filtered-products-${index}`
+    );
 
-  let allTitles = document.querySelectorAll("h5");
-  let allTables = document.querySelectorAll("table");
+    let allTitles = document.querySelectorAll("h5");
+    let allTables = document.querySelectorAll("table");
 
-  allTables.forEach((element) => element.classList.remove("active"));
-  allTitles.forEach((element) => element.classList.remove("active"));
+    allTables.forEach((element) => element.classList.remove("active"));
+    allTitles.forEach((element) => element.classList.remove("active"));
 
-  table.classList.add("active");
-  title.classList.add("active");
-  filterTable.classList.add("active");
-  filterTitle.classList.add("active");
+    table.classList.add("active");
+    title.classList.add("active");
+    filterTable.classList.add("active");
+    filterTitle.classList.add("active");
 
-  return index;
-};
+    return index;
+  };
 
-const goNextWeek = (weekNumber) => {
-  index++;
-  if (index === weekNumber - 1) {
-    arrowRight.setAttribute("disabled", "disabled");
-  } else {
-    if (index === 1) {
-      arrowLeft.removeAttribute("disabled");
+  const goNextWeek = (weekNumber) => {
+    index++;
+    if (index === weekNumber - 1) {
+      arrowRight.setAttribute("disabled", "disabled");
+    } else {
+      if (index === 1) {
+        arrowLeft.removeAttribute("disabled");
+      }
     }
-  }
-  let table = document.querySelector(`.products-${index}`);
-  let filterTable = document.querySelector(`.filtered-products-${index}`);
-  let title = document.querySelector(`.title-products-${index}`);
-  let filterTitle = document.querySelector(`.title-filtered-products-${index}`);
+    let table = document.querySelector(`.products-${index}`);
+    let filterTable = document.querySelector(`.filtered-products-${index}`);
+    let title = document.querySelector(`.title-products-${index}`);
+    let filterTitle = document.querySelector(
+      `.title-filtered-products-${index}`
+    );
 
-  let allTitles = document.querySelectorAll("h5");
-  let allTables = document.querySelectorAll("table");
+    let allTitles = document.querySelectorAll("h5");
+    let allTables = document.querySelectorAll("table");
 
-  allTables.forEach((element) => element.classList.remove("active"));
-  allTitles.forEach((element) => element.classList.remove("active"));
+    allTables.forEach((element) => element.classList.remove("active"));
+    allTitles.forEach((element) => element.classList.remove("active"));
 
-  table.classList.add("active");
-  title.classList.add("active");
-  filterTable.classList.add("active");
-  filterTitle.classList.add("active");
+    table.classList.add("active");
+    title.classList.add("active");
+    filterTable.classList.add("active");
+    filterTitle.classList.add("active");
 
-  return index;
-};
+    return index;
+  };
 })();
 
+let table = document.querySelector(`.products-0`);
 
+table.onclick = () => {
+  const sortByStatus = () => { 
+    fn.globalArrayItemsCopy[0].sort((a, b) => (a.name > b.name) ? 1 : -1);
+    console.log(fn.globalArrayItemsCopy[0]);
+    fn.changePrint(`.products-0`, fn.globalArrayItemsCopy[0]);
 
-/* // BONUS ONE CATEGORY SORTING
-let idProduct = document.querySelector(".ID");
-let nameProduct = document.querySelector(".Name");
-let statusProduct = document.querySelector(".Status");
-let expDateProduct = document.querySelector(".Expiration-date");
-let checkProduct = document.querySelector(".Check");
+  }
+  let idProduct = document.querySelector(".ID");
+  let nameProduct = document.querySelector(".Name");
+  let statusProduct = document.querySelector(".Status");
+  let expDateProduct = document.querySelector(".Expiration-date");
+  let checkProduct = document.querySelector(".Check");
 
-
-statusProduct.addEventListener("click", sortByStatus);
- */
+  nameProduct.addEventListener("click", sortByStatus);
+}
