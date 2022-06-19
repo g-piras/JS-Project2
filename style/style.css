@@ -13,7 +13,7 @@ table {
     display: none;
 }
 
-table tr th {
+table thead th {
     background-color: orange;
     padding: 5px;
     text-align: center;

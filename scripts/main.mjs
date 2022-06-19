@@ -13,9 +13,14 @@ import * as fn from "./library.mjs"; // functions used in the program
   cnf.maxExpDate.setDate(
     cnf.maxExpDate.getDate() + (cnf.dayWeek * cnf.runWeeks + cnf.dayWeek)
   );
+  // CREATE TABLES BASED ON HOW MANY WEEKS THERE ARE
   for (let i = 0; i < cnf.runWeeks; i++) {
-    fn.createTable(`products-${i}`, cnf.startWeek, cnf.language);
-    fn.createTable(`filtered-products-${i}`, cnf.startWeek, cnf.language);
+    fn.createTable(`products`, i);
+    fn.createTable(`filtered-products`, i);
+  }
+  // CREATES TITLES, PRINTS TABLES, CREATES ITEMS; CHANGES STATUS; REMOVES ITEMS, CREATES TWO ARRAY (FILTERED + NOT FILTERED) AND CHANGES WEEK DATE
+  for (let i = 0; i < cnf.runWeeks; i++) {
+    fn.createTitles(cnf.startWeek, cnf.language);
     fn.createNewWeek(
       cnf.startWeek,
       cnf.maxExpDate,
@@ -24,16 +29,14 @@ import * as fn from "./library.mjs"; // functions used in the program
       cnf.runWeeks
     );
     fn.changeStatus(cnf.startWeek, cnf.itemLifeSpan, fn.globalArrayItems[i]);
-    fn.print(`.products-${i}`, cnf.language, fn.globalArrayItems[i]);
+    fn.print(`.products`, cnf.language, fn.globalArrayItems[i], i);
     fn.createCopyGlobalArray(i);
     fn.removeItem(fn.globalArrayItems[i]);
     fn.createCopyGlobalArrayFiltered(i);
-    fn.print(`.filtered-products-${i}`, cnf.language, fn.globalArrayItems[i]);
+    fn.print(`.filtered-products`, cnf.language, fn.globalArrayItems[i], i);
     cnf.startWeek.setDate(cnf.startWeek.getDate() + cnf.dayWeek);
   }
-  console.log(fn.globalArrayItems);
-  console.log(fn.globalArrayItemsCopy);
-  console.log(fn.globalArrayItemsCopyFiltered);
+
   // BUTTON MOVE NEXT WEEK
   let arrowLeft = document.querySelector(".arrow-left");
   let arrowRight = document.querySelector(".arrow-right");
@@ -110,12 +113,11 @@ import * as fn from "./library.mjs"; // functions used in the program
 let table = document.querySelector(`.products-0`);
 
 table.onclick = () => {
-  const sortByStatus = () => { 
-    fn.globalArrayItemsCopy[0].sort((a, b) => (a.name > b.name) ? 1 : -1);
+  const sortByStatus = () => {
+    fn.globalArrayItemsCopy[0].sort((a, b) => (a.name > b.name ? 1 : -1));
     console.log(fn.globalArrayItemsCopy[0]);
     fn.changePrint(`.products-0`, fn.globalArrayItemsCopy[0]);
-
-  }
+  };
   let idProduct = document.querySelector(".ID");
   let nameProduct = document.querySelector(".Name");
   let statusProduct = document.querySelector(".Status");
@@ -123,4 +125,4 @@ table.onclick = () => {
   let checkProduct = document.querySelector(".Check");
 
   nameProduct.addEventListener("click", sortByStatus);
-}
+};

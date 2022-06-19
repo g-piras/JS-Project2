@@ -327,9 +327,11 @@ let paddingDate = (d, lang) => {
 };
 
 // NEW FUNCTIONS
-export let print = (tableClass, lang, week) => {
+/* PRINT CONTENT */
+export let print = (tableClass, lang, week, i) => {
+  let table = document.querySelectorAll(tableClass);
+  let tBody = document.createElement("tbody");
   week.forEach((element) => {
-    let table = document.querySelector(tableClass);
     let tr = document.createElement("tr");
     for (let key in element) {
       let td = document.createElement("td");
@@ -341,36 +343,46 @@ export let print = (tableClass, lang, week) => {
         td.textContent = element[key];
       }
       tr.appendChild(td);
+      tBody.appendChild(tr);
     }
-    table.appendChild(tr);
+    table[i].appendChild(tBody);
   });
 };
 
-export let createTable = (tableClass, dateWeek, lang) => {
+/* PRINT TABLES  */
+export let createTable = (tableClass, dateWeek, lang, index) => {
   let title = document.createElement("h5");
   let table = document.createElement("table");
   table.setAttribute("class", tableClass);
   title.setAttribute("class", `title-${tableClass}`);
-  if (tableClass.includes("filtered-products") === true) {
-    title.textContent = "Products filtered";
-  } else {
-    title.textContent = "Week of " + paddingDate(dateWeek, lang);
-  }
+  let thead = document.createElement("thead");
   let tr = document.createElement("tr");
   const keys = ["ID", "Name", "Status", "Expiration-date", "Check"];
   for (let key in keys) {
     let th = document.createElement("th");
     th.textContent = keys[key];
     th.setAttribute("class", keys[key]);
+    thead.appendChild(tr);
     tr.appendChild(th);
   }
-  table.appendChild(tr);
+  table.appendChild(thead);
   document.body.appendChild(title);
   document.body.appendChild(table);
-  if (tableClass.includes("products-0") === true) {
+  if (index === 0) {
     table.classList.add("active");
     title.classList.add("active");
   }
+};
+/* FOR TITLES */
+export let createTitles = (dateWeek, lang) => {
+  let title = document.querySelectorAll("h5");
+  title.forEach((element) => {
+    if (element.classList.contains("title-filtered-products") === true) {
+      element.textContent = "Products filtered";
+    } else {
+      element.textContent = "Week of " + paddingDate(dateWeek, lang);
+    }
+  });
 };
 
 export const changePrint = (tableClass, week) => {
