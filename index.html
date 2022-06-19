@@ -42,27 +42,34 @@
             <div class="box-input">
                 <label for="start-date">Start date:</label>
                 <input type="date" id="start-date" name="start-date" required/>
+                <div class="error-message" id="startDateErr"></div>
                 <label for="days-to-wait">Days to wait:</label>
                 <input type="number" id="days-to-wait" name="days-to-wait" required/>
+                <span class="error-message" id="daysToWaitErr"></span>
             </div>
                 
             <div class="box-input">
                 <label for="weeks">Weeks:</label>
                 <input type="number" id="weeks" name="weeks" min="1" required/>
+                <div class="error-message" id="weeksErr"></div>
                 <label for="items-per-week">Items per week:</label>
                 <input type="number" id="items-per-week" name="items-per-week" min="1" required/>
+                <div class="error-message" id="itemsPerWeekErr"></div>
             </div>
         
             <div class="box-input">
                 <label for="item-week-life">Item week life:</label>
                 <input type="number" id="item-week-life" name="item-week-life" min="1" required/>
+                <div class="error-message" id="itemWeekLifeErr"></div>
                 <label for="language">Language</label>
                 <select name="language" id="language">
                     <option value="english">English</option>
                     <option value="italian">Italian</option>
                 </select>
                 <!--button to save settings-->
-                <input type="submit" value="Save settings" id="submit-button" required/>
+                <input type="reset" value="Reset" id="reset-button"/>
+                <input type="submit" value="Save settings" id="submit-button"/>
+                
             </div>  
         </div>
 
@@ -225,7 +232,7 @@
         <script src="./scripts/variables.js"></script>
         <script src="./scripts/library.js"></script>
         <script src="./scripts/main.js"></script> -->
-        <script src="./scripts/form-validator.js"></script>
+        <script type="module" src="./scripts/form-validator.mjs"></script>
         <!--End of the body-->
     </body>
 </html>
