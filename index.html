@@ -1,18 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!--Beginning of the header-->
-    <meta charset="utf-8" />
-    <title>Expiry List</title>
-    <meta name="description" content="Project Expiry List" />
-    <meta name="authors" content="-" />
-    <link rel="stylesheet" href="./style/style.css" />
+    <head>
+        <!--Beginning of the header-->
+        <meta charset="utf-8" />
+        <title>Market Project</title>
+        <meta name="description" content="Market project" />
+        <meta name="authors" content="Lombardo, Parisi, Piras, Trabbia" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./style/reset.css" />
+        <link rel="stylesheet" href="./style/style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="icon" type="image/x-icon" href="./images/market.png">
+        
+        <!--End of the header-->
+    </head>
     <body>
-      <input type="button" value="<-" class="arrow-left">
-      <input type="button" value="->" class="arrow-right">
-      <!--Js files called-->
-      <script type="module" src="./scripts/main.mjs"></script>
-      <!--End of the body-->
+        <!--Beginning of the body-->
+        <header>
+            <nav>
+                <ul>
+                    <li><img src="./images/market.png" alt="market icon" /></li>
+                    <li>
+                        <h1>MARKET PROJECT - A weekly product dashboard</h1>
+                    </li>
+                    <li>
+                        <label for="settings">
+                            <img
+                                src="./images/settings-icon.svg"
+                                alt="settings icon"
+                            />
+                        </label>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <input type="checkbox" name="settings" id="settings">
+
+        <div class="settings-panel">
+            <div class="box-input">
+                <label for="start-date">Start date:</label>
+                <input type="date" id="start-date" name="start-date"/>
+                <label for="days-to-wait">Days to wait:</label>
+                <input type="number" id="days-to-wait" name="days-to-wait"/>
+            </div>
+                
+            <div class="box-input">
+                <label for="weeks">Weeks:</label>
+                <input type="number" id="weeks" name="weeks"/>
+                <label for="items-per-week">Items per week:</label>
+                <input type="number" id="items-per-week" name="items-per-week"/>
+            </div>
+        
+            <div class="box-input">
+                <label for="item-week-life">Item week life:</label>
+                <input type="number" id="item-week-life" name="item-week-life"/>
+                <label for="language">Language</label>
+                <select name="language" id="language">
+                    <option value="english">English</option>
+                    <option value="italian">Italian</option>
+                </select>
+                <!--button to save settings-->
+                <input type="submit" value="Save settings" id="submit-button"/>
+            </div>  
+        </div>
+
+        <main>
+
+            <section>
+                <img src="./images/left-arrow.png" 
+                    alt="right arrow" 
+                    title="previous week"
+                    class="previous-week"
+                />
+
+                <!-- test tables -->
+                <div class="week-items">
+                    <div class="info">
+                        <span class="week-number">Prova 1</span>
+                        <span class="week-date">11-JUNE-2022</span>
+                    </div>
+                    <table class="all-week-products">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Expiry date</th>
+                                <th>Status</th>
+                                <th>Checks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="filtered-items">
+                    <div class="info">
+                        <span class="week-number">Filtered</span>
+                    </div>
+                    <table class="filtered-week-products">
+                        <thead>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Expiry date</th>
+                            <th>Status</th>
+                            <th>Checks</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <img src="./images/right-arrow.png" 
+                    alt="right arrow" 
+                    title="next week"
+                    class="next-week"
+                />
+            </section>
+
+        </main>
+
+        <!--Js files called-->
+        <!-- <script src="./scripts/manager.js"></script>
+        <script src="./scripts/variables.js"></script>
+        <script src="./scripts/library.js"></script>
+        <script src="./scripts/main.js"></script> -->
+        <script src="./scripts/form-validator.js"></script>
+        <!--End of the body-->
     </body>
-  </head>
 </html>

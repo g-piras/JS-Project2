@@ -7,7 +7,9 @@
  */
 
 //the global array where the items will be pushed
-const globalArrayItems = [];
+export const globalArrayItems = [];
+export const globalArrayItemsCopy = [];
+export const globalArrayItemsCopyFiltered = [];
 
 //the number from where the unique ID will be incremented
 let sumID = 1;
@@ -183,32 +185,53 @@ let randomDate = (start, end) => {
   return date;
 };
 
+export let createNewWeek = (startingDate, maxExpDate, itemsNum, index) => {
+  const week = [];
+  for (let i = 0; i < itemsNum; i++) {
+    week.push(createNewItem(startingDate, maxExpDate));
+  }
+  if (index > 0) {
+    globalArrayItems.push(globalArrayItems[index - 1].concat(week));
+  } else {
+    globalArrayItems.push(week);
+  }
+};
+
+export let createCopyGlobalArray = (index) => {
+  const WeekClone = JSON.parse(JSON.stringify(globalArrayItems[index]));
+  globalArrayItemsCopy.push(WeekClone);
+};
+
+export let createCopyGlobalArrayFiltered = (index) => {
+  const WeekClone = JSON.parse(JSON.stringify(globalArrayItems[index]));
+  globalArrayItemsCopyFiltered.push(WeekClone);
+};
+
 /**
  * Function that creates the object item and places it inside the global array of items
  * It uses the functions ID() and chooseItem()
  * @param {date} startingDate the programs current date, used to generate a valid expiration date
  */
-export let createNewItem = (startingDate, maxExpDate) => {
+let createNewItem = (startingDate, maxExpDate) => {
   let item = {
     id: ID(),
     name: chooseItem(),
     status: "new",
     expirationDate: randomDate(
-      new Date(startingDate).setDate(new Date(startingDate).getDate() - 10),
+      new Date(startingDate).setDate(new Date(startingDate).getDate()),
       maxExpDate
     ),
     check: -1,
   };
-  globalArrayItems.push(item);
+  return item;
 };
 
 /**
  * Function that changes the status of every item in the global array
  * @param {object} startWeek - every week the program runs
  */
-export let changeStatus = (startWeek, itemLife) => {
-  for (let i = 0; i < globalArrayItems.length; i++) {
-    let item = globalArrayItems[i];
+export let changeStatus = (startWeek, itemLife, week) => {
+  week.forEach((item) => {
     if (startWeek.getTime() > item.expirationDate.getTime()) {
       item.status = "expired";
     } else {
@@ -219,17 +242,17 @@ export let changeStatus = (startWeek, itemLife) => {
       }
     }
     item.check++;
-  }
+  });
 };
 
 /**
  * Function that remove an item from the global array, if its status is "old" or "expired"
  */
-export let removeItem = () => {
-  for (let i = 0; i < globalArrayItems.length; i++) {
-    let item = globalArrayItems[i];
+export let removeItem = (week) => {
+  for (let i = 0; i < week.length; i++) {
+    let item = week[i];
     if (item.status === "old" || item.status === "expired") {
-      globalArrayItems.splice(i, 1);
+      week.splice(i, 1);
       i = -1;
     }
   }
@@ -304,8 +327,8 @@ let paddingDate = (d, lang) => {
 };
 
 // NEW FUNCTIONS
-export let print = (tableClass, lang) => {
-  globalArrayItems.forEach((element) => {
+export let print = (tableClass, lang, week) => {
+  week.forEach((element) => {
     let table = document.querySelector(tableClass);
     let tr = document.createElement("tr");
     for (let key in element) {
@@ -334,7 +357,7 @@ export let createTable = (tableClass, dateWeek, lang) => {
     title.textContent = "Week of " + paddingDate(dateWeek, lang);
   }
   let tr = document.createElement("tr");
-  const keys = ["ID", "Name", "Status", "Expiration Date", "Check"];
+  const keys = ["ID", "Name", "Status", "Expiration-date", "Check"];
   for (let key in keys) {
     let th = document.createElement("th");
     th.textContent = keys[key];
@@ -348,4 +371,18 @@ export let createTable = (tableClass, dateWeek, lang) => {
     table.classList.add("active");
     title.classList.add("active");
   }
+};
+
+export const changePrint = (tableClass, week) => {
+  let table = document.querySelector(tableClass);
+  table.textContent = "";
+  week.forEach((element) => {
+    let tr = document.createElement("tr");
+    for (let key in element) {
+      let td = document.createElement("td");
+      td.textContent = element[key];
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
+  });
 };

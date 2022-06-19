@@ -1,0 +1,200 @@
+/**
+ * @file: style.css
+ * @authors: Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
+ * @project: Market
+ * 
+ * This file contains the CSS applied to the index.html page
+ */
+ * {
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    background-image: url("../images/Predawn.jpg");
+    background-size: cover;
+    color: #322823;
+}
+
+li img[alt="market icon"] {
+    width: 60px;
+}
+
+li img[alt="settings icon"] {
+    width: 30px;
+}
+li img[alt="settings icon"]:hover {
+    cursor: pointer;
+}
+
+li:last-of-type {
+    padding-right: 10px;
+}
+
+li:first-of-type {
+    padding-left: 10px;
+}
+
+nav ul {
+    background-color: #d8b494;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+
+.settings-panel {
+    display: none;
+}
+
+.box-input {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+
+input, label, select {
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    position: absolute;
+    bottom: -45px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: fit-content;
+    align-self: flex-end;
+}
+
+#settings {
+    display: none;
+}
+
+#settings:checked ~ .settings-panel {
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    background-color: bisque;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 210px;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    z-index: 1;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+section {
+    position: relative;
+    background-color: white;
+    width: 65%;
+    height: 500px;
+    margin: 5% auto;
+    border-radius: 10px;
+}
+
+section img {
+    width: 50px;
+    position: absolute;
+    top: 45%;
+}
+
+section img:first-of-type {
+    left: -60px;
+}
+
+section img:last-of-type {
+    right: -60px;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #237297;
+    color: white;
+    border-radius: 10px;
+    font-size: 1.6em;
+    height: 50px;
+}
+
+.week-items,
+.filtered-items {
+    margin: 10px 10px 5px 10px;
+    border-radius: 10px;
+
+}
+
+.week-items span,
+.filtered-items span {
+    padding: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    text-align: center;
+}
+
+thead th:last-of-type,
+tbody tr td:last-of-type {
+    padding-right: 30px;
+}
+
+thead, tbody, tr, th, td {
+    display: block;
+}
+
+thead {
+    border-bottom: 2px solid rgba(218, 218, 218, 0.671);
+    background-color: white;
+    font-weight: bold;
+}
+
+thead tr {
+    width: calc(100% - 16px);
+}
+
+thead th {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+tbody {
+    height: 160px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+tbody td, thead th {
+    width: 19%;
+    float: left;
+}
+
+tbody tr td{
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+tr:after {  /* clearing float */
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+tbody tr {
+    border-bottom: 2px solid rgba(218, 218, 218, 0.671);
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: rgb(245, 232, 207);
+}
