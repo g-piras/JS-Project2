@@ -350,7 +350,7 @@ export let print = (tableClass, lang, week, i) => {
 };
 
 /* PRINT TABLES  */
-export let createTable = (tableClass, dateWeek, lang, index) => {
+export let createTable = (tableClass, index) => {
   let title = document.createElement("h5");
   let table = document.createElement("table");
   table.setAttribute("class", tableClass);
@@ -374,20 +374,19 @@ export let createTable = (tableClass, dateWeek, lang, index) => {
   }
 };
 /* FOR TITLES */
-export let createTitles = (dateWeek, lang) => {
-  let title = document.querySelectorAll("h5");
-  title.forEach((element) => {
-    if (element.classList.contains("title-filtered-products") === true) {
-      element.textContent = "Products filtered";
-    } else {
-      element.textContent = "Week of " + paddingDate(dateWeek, lang);
-    }
-  });
+export let createTitles = (dateWeek, lang, index) => {
+  let title = document.querySelectorAll(".title-products");
+  let filteredTitle = document.querySelectorAll(".title-filtered-products");
+
+  title[index].textContent = "Week of " + paddingDate(dateWeek, lang);
+  filteredTitle[index].textContent = "Products filtered";
 };
 
-export const changePrint = (tableClass, week) => {
-  let table = document.querySelector(tableClass);
-  table.textContent = "";
+// NEEDS A FIX
+export const changePrint = (week) => {
+  let table = document.querySelectorAll(tableClass);
+  table[index]
+  let tBody = document.createElement("tbody")
   week.forEach((element) => {
     let tr = document.createElement("tr");
     for (let key in element) {
