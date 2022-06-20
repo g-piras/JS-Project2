@@ -80,7 +80,7 @@ const sortByStatus = (arrayCopy, index, idName, lang) => {
 };
 const sortByExpDate = (arrayCopy, index, idName, lang) => {
   arrayCopy[index].sort((a, b) =>
-    getTime(a.expirationDate) > getTime(b.expirationDate) ? 1 : -1
+    a.expirationDate > b.expirationDate ? 1 : -1
   );
   fn.changePrint(idName, arrayCopy[index], lang);
 };
@@ -98,32 +98,78 @@ let checkProduct = document.querySelectorAll(".products .Check");
 nameId.forEach((element) => {
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
-    sortById(fn.globalArrayItemsCopy, 0, idTable, cnf.language);
+    let index = parseInt(idTable.match(/\d/g).join(""));
+    sortById(fn.globalArrayItemsCopy, index, idTable, cnf.language);
   });
 });
 nameProduct.forEach((element) => {
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
-    sortByProduct(fn.globalArrayItemsCopy, 0, idTable, cnf.language);
+    let index = parseInt(idTable.match(/\d/g).join(""));
+    sortByProduct(fn.globalArrayItemsCopy, index, idTable, cnf.language);
   });
 });
 statusProduct.forEach((element) => {
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
-    sortByStatus(fn.globalArrayItemsCopy, 0, idTable, cnf.language);
+    let index = parseInt(idTable.match(/\d/g).join(""));
+    sortByStatus(fn.globalArrayItemsCopy, index, idTable, cnf.language);
   });
 });
 expDateProduct.forEach((element) => {
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
-    sortByExpDate(fn.globalArrayItemsCopy, 0, idTable, cnf.language);
+    let index = parseInt(idTable.match(/\d/g).join(""));
+    sortByExpDate(fn.globalArrayItemsCopy, index, idTable, cnf.language);
   });
 });
 checkProduct.forEach((element) => {
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
-    sortByCheck(fn.globalArrayItemsCopy, 0, idTable, cnf.language);
+    let index = parseInt(idTable.match(/\d/g).join(""));
+    sortByCheck(fn.globalArrayItemsCopy, index, idTable, cnf.language);
   });
 });
 
+let nameIdFiltered = document.querySelectorAll(".filtered-products .ID");
+let nameProductFiltered = document.querySelectorAll(".filtered-products .Name");
+let statusProductFiltered = document.querySelectorAll(".filtered-products .Status");
+let expDateProductFiltered = document.querySelectorAll(".filtered-products .Expiration-date");
+let checkProductFiltered = document.querySelectorAll(".filtered-products .Check");
+
+nameIdFiltered.forEach((element) => {
+  element.addEventListener("click", () => {
+    let idTable = element.parentElement.parentElement.parentElement.id;
+    let index = parseInt(idTable.match(/\d/g).join(""));
+    sortById(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+  });
+});
+nameProductFiltered.forEach((element) => {
+  element.addEventListener("click", () => {
+    let idTable = element.parentElement.parentElement.parentElement.id;
+    let index = parseInt(idTable.match(/\d/g).join(""));
+    sortByProduct(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+  });
+});
+statusProductFiltered.forEach((element) => {
+  element.addEventListener("click", () => {
+    let idTable = element.parentElement.parentElement.parentElement.id;
+    let index = parseInt(idTable.match(/\d/g).join(""));
+    sortByStatus(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+  });
+});
+expDateProductFiltered.forEach((element) => {
+  element.addEventListener("click", () => {
+    let idTable = element.parentElement.parentElement.parentElement.id;
+    let index = parseInt(idTable.match(/\d/g).join(""));
+    sortByExpDate(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+  });
+});
+checkProductFiltered.forEach((element) => {
+  element.addEventListener("click", () => {
+    let idTable = element.parentElement.parentElement.parentElement.id;
+    let index = parseInt(idTable.match(/\d/g).join(""));
+    sortByCheck(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+  });
+});
 // BONUS 2
