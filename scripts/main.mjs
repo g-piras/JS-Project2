@@ -137,10 +137,22 @@ nameProduct.forEach((element) => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
     if (cresc === false) {
-    sortByProduct(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByProduct(
+        fn.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = true;
     } else {
-      sortByProduct(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByProduct(
+        fn.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = false;
     }
   });
@@ -151,10 +163,22 @@ statusProduct.forEach((element) => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
     if (cresc === true) {
-      sortByStatus(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByStatus(
+        fn.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = false;
     } else {
-      sortByStatus(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByStatus(
+        fn.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = true;
     }
   });
@@ -165,10 +189,22 @@ expDateProduct.forEach((element) => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
     if (cresc === true) {
-      sortByExpDate(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByExpDate(
+        fn.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = false;
     } else {
-      sortByExpDate(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByExpDate(
+        fn.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = true;
     }
   });
@@ -220,10 +256,22 @@ nameProductFiltered.forEach((element) => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
     if (cresc === false) {
-    sortByProduct(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByProduct(
+        fn.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = true;
     } else {
-      sortByProduct(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByProduct(
+        fn.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = false;
     }
   });
@@ -234,10 +282,22 @@ statusProductFiltered.forEach((element) => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
     if (cresc === true) {
-    sortByStatus(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByStatus(
+        fn.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = false;
     } else {
-      sortByStatus(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByStatus(
+        fn.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = true;
     }
   });
@@ -248,10 +308,22 @@ expDateProductFiltered.forEach((element) => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
     if (cresc === true) {
-    sortByExpDate(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByExpDate(
+        fn.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = false;
     } else {
-      sortByExpDate(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByExpDate(
+        fn.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = true;
     }
   });
@@ -262,7 +334,7 @@ checkProductFiltered.forEach((element) => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
     if (cresc === true) {
-    sortByCheck(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByCheck(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
       cresc = false;
     } else {
       sortByCheck(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
@@ -274,22 +346,28 @@ checkProductFiltered.forEach((element) => {
 // BONUS 2
 let trTable = document.querySelectorAll(".products tbody tr");
 trTable.forEach((element) => {
+  let placeholder;
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
-    console.log(index);
-    let tdStatus = element.querySelector(".products tbody tr td:nth-child(3)");
-    tdStatus.classList.toggle("removed");
-    if (tdStatus.textContent !== "Removed") {
-      tdStatus.textContent = "Removed";
-    } else {
-      tdStatus.textContent = placeholder;
-    }
-    for (let i = index + 1; index < cnf.runWeeks; i++) {
-      element[i].classList.toggle("hidden");
-    }
+    placeholder = fn.printRemove("products", element, placeholder);
+    let idItem = element.querySelector(
+      ".products tbody tr td:nth-child(1)"
+    ).textContent;
+    fn.hideItem("products", idItem, index, cnf.runWeeks);
   });
 });
 
-let tdFilteredTable = document.querySelectorAll(".products tbody td");
-tdFilteredTable.forEach((element) => {});
+let trFilteredTable = document.querySelectorAll(".filtered-products tbody tr");
+trFilteredTable.forEach((element) => {
+  let placeholder;
+  element.addEventListener("click", () => {
+    let idTable = element.parentElement.parentElement.id;
+    let index = parseInt(idTable.match(/\d/g).join(""));
+    placeholder = fn.printRemove("filtered-products", element, placeholder);
+    let idItem = element.querySelector(
+      ".filtered-products tbody tr td:nth-child(1)"
+    ).textContent;
+    fn.hideItem("filtered-products", idItem, index, cnf.runWeeks);
+  });
+});
