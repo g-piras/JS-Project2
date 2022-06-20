@@ -66,26 +66,48 @@ import * as fn from "./library.mjs"; // functions used in the program
   });
 })();
 //BONUS 1
-const sortById = (arrayCopy, index, idName, lang) => {
-  arrayCopy[index].sort((a, b) => (a.id > b.id ? 1 : -1));
+const sortById = (arrayCopy, index, idName, lang, cresc) => {
+  if (cresc === true) {
+    arrayCopy[index].sort((a, b) => (a.id > b.id ? 1 : -1));
+  } else {
+    arrayCopy[index].sort((a, b) => (a.id < b.id ? 1 : -1));
+  }
   fn.changePrint(idName, arrayCopy[index], lang);
 };
-const sortByProduct = (arrayCopy, index, idName, lang) => {
-  arrayCopy[index].sort((a, b) => (a.name > b.name ? 1 : -1));
+const sortByProduct = (arrayCopy, index, idName, lang, cresc) => {
+  if (cresc === true) {
+    arrayCopy[index].sort((a, b) => (a.name > b.name ? 1 : -1));
+  } else {
+    arrayCopy[index].sort((a, b) => (a.name < b.name ? 1 : -1));
+  }
   fn.changePrint(idName, arrayCopy[index], lang);
 };
-const sortByStatus = (arrayCopy, index, idName, lang) => {
-  arrayCopy[index].sort((a, b) => (a.status > b.status ? 1 : -1));
+const sortByStatus = (arrayCopy, index, idName, lang, cresc) => {
+  if (cresc === true) {
+    arrayCopy[index].sort((a, b) => (a.status > b.status ? 1 : -1));
+  } else {
+    arrayCopy[index].sort((a, b) => (a.status < b.status ? 1 : -1));
+  }
   fn.changePrint(idName, arrayCopy[index], lang);
 };
-const sortByExpDate = (arrayCopy, index, idName, lang) => {
-  arrayCopy[index].sort((a, b) =>
-    a.expirationDate > b.expirationDate ? 1 : -1
-  );
+const sortByExpDate = (arrayCopy, index, idName, lang, cresc) => {
+  if (cresc === true) {
+    arrayCopy[index].sort((a, b) =>
+      a.expirationDate > b.expirationDate ? 1 : -1
+    );
+  } else {
+    arrayCopy[index].sort((a, b) =>
+      a.expirationDate < b.expirationDate ? 1 : -1
+    );
+  }
   fn.changePrint(idName, arrayCopy[index], lang);
 };
-const sortByCheck = (arrayCopy, index, idName, lang) => {
-  arrayCopy[index].sort((a, b) => (a.check > b.check ? 1 : -1));
+const sortByCheck = (arrayCopy, index, idName, lang, cresc) => {
+  if (cresc === true) {
+    arrayCopy[index].sort((a, b) => (a.check > b.check ? 1 : -1));
+  } else {
+    arrayCopy[index].sort((a, b) => (a.check < b.check ? 1 : -1));
+  }
   fn.changePrint(idName, arrayCopy[index], lang);
 };
 
@@ -96,80 +118,178 @@ let expDateProduct = document.querySelectorAll(".products .Expiration-date");
 let checkProduct = document.querySelectorAll(".products .Check");
 
 nameId.forEach((element) => {
+  let cresc = false;
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
-    sortById(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+    if (cresc === false) {
+      sortById(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = true;
+    } else {
+      sortById(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = false;
+    }
   });
 });
 nameProduct.forEach((element) => {
+  let cresc = true;
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
-    sortByProduct(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+    if (cresc === false) {
+    sortByProduct(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = true;
+    } else {
+      sortByProduct(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = false;
+    }
   });
 });
 statusProduct.forEach((element) => {
+  let cresc = true;
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
-    sortByStatus(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+    if (cresc === true) {
+      sortByStatus(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = false;
+    } else {
+      sortByStatus(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = true;
+    }
   });
 });
 expDateProduct.forEach((element) => {
+  let cresc = true;
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
-    sortByExpDate(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+    if (cresc === true) {
+      sortByExpDate(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = false;
+    } else {
+      sortByExpDate(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = true;
+    }
   });
 });
 checkProduct.forEach((element) => {
+  let cresc = true;
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
-    sortByCheck(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+    if (cresc === true) {
+      sortByCheck(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = false;
+    } else {
+      sortByCheck(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = true;
+    }
   });
 });
 
 let nameIdFiltered = document.querySelectorAll(".filtered-products .ID");
 let nameProductFiltered = document.querySelectorAll(".filtered-products .Name");
-let statusProductFiltered = document.querySelectorAll(".filtered-products .Status");
-let expDateProductFiltered = document.querySelectorAll(".filtered-products .Expiration-date");
-let checkProductFiltered = document.querySelectorAll(".filtered-products .Check");
+let statusProductFiltered = document.querySelectorAll(
+  ".filtered-products .Status"
+);
+let expDateProductFiltered = document.querySelectorAll(
+  ".filtered-products .Expiration-date"
+);
+let checkProductFiltered = document.querySelectorAll(
+  ".filtered-products .Check"
+);
 
 nameIdFiltered.forEach((element) => {
+  let cresc = false;
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
-    sortById(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+    if (cresc === true) {
+      sortById(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = false;
+    } else {
+      sortById(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = true;
+    }
   });
 });
 nameProductFiltered.forEach((element) => {
+  let cresc = true;
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
-    sortByProduct(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+    if (cresc === false) {
+    sortByProduct(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = true;
+    } else {
+      sortByProduct(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = false;
+    }
   });
 });
 statusProductFiltered.forEach((element) => {
+  let cresc = true;
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
-    sortByStatus(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+    if (cresc === true) {
+    sortByStatus(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = false;
+    } else {
+      sortByStatus(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = true;
+    }
   });
 });
 expDateProductFiltered.forEach((element) => {
+  let cresc = true;
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
-    sortByExpDate(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+    if (cresc === true) {
+    sortByExpDate(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = false;
+    } else {
+      sortByExpDate(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = true;
+    }
   });
 });
 checkProductFiltered.forEach((element) => {
+  let cresc = true;
   element.addEventListener("click", () => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
-    sortByCheck(fn.globalArrayItemsCopy, index, idTable, cnf.language);
+    if (cresc === true) {
+    sortByCheck(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = false;
+    } else {
+      sortByCheck(fn.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      cresc = true;
+    }
   });
 });
+
 // BONUS 2
+let trTable = document.querySelectorAll(".products tbody tr");
+trTable.forEach((element) => {
+  element.addEventListener("click", () => {
+    let idTable = element.parentElement.parentElement.id;
+    let index = parseInt(idTable.match(/\d/g).join(""));
+    console.log(index);
+    let tdStatus = element.querySelector(".products tbody tr td:nth-child(3)");
+    tdStatus.classList.toggle("removed");
+    if (tdStatus.textContent !== "Removed") {
+      tdStatus.textContent = "Removed";
+    } else {
+      tdStatus.textContent = placeholder;
+    }
+    for (let i = index + 1; index < cnf.runWeeks; i++) {
+      element[i].classList.toggle("hidden");
+    }
+  });
+});
+
+let tdFilteredTable = document.querySelectorAll(".products tbody td");
+tdFilteredTable.forEach((element) => {});

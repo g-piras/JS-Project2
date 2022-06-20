@@ -41,6 +41,14 @@ h5 {
     display: block;
 }
 
+.hidden {
+    display: none;
+}
+
+.removed {
+    color: red;
+}
+
 .arrow-left, .arrow-right {
     position: absolute;
     top: 45%;
