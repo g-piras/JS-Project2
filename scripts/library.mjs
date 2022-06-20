@@ -20,7 +20,7 @@ let sumID = 1;
  * @param {number} max - the maximum number of the range
  * @returns {number} the random number
  */
-export let randomNumber = (min, max) => {
+export const randomNumber = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
@@ -30,7 +30,7 @@ export let randomNumber = (min, max) => {
  * Function that gets a random item from an array of possible choices
  * @returns {string} the random item chosen
  */
-let chooseItem = () => {
+const chooseItem = () => {
   const possibileItems = [
     "Asparagus",
     "Apples",
@@ -168,7 +168,7 @@ let chooseItem = () => {
  * @returns the unique ID
  */
 // funzione +1 ID ITEM
-let ID = () => {
+const ID = () => {
   let uniqueId = sumID;
   sumID++;
   return uniqueId;
@@ -180,12 +180,12 @@ let ID = () => {
  * @param {date} end the maximum date included
  * @returns {date} a random date between start and end (included)
  */
-let randomDate = (start, end) => {
+const randomDate = (start, end) => {
   let date = new Date(+start + Math.random() * (end - start));
   return date;
 };
 
-export let createNewWeek = (startingDate, maxExpDate, itemsNum, index) => {
+export const createNewWeek = (startingDate, maxExpDate, itemsNum, index) => {
   const week = [];
   for (let i = 0; i < itemsNum; i++) {
     week.push(createNewItem(startingDate, maxExpDate));
@@ -197,12 +197,12 @@ export let createNewWeek = (startingDate, maxExpDate, itemsNum, index) => {
   }
 };
 
-export let createCopyGlobalArray = (index) => {
+export const createCopyGlobalArray = (index) => {
   const WeekClone = JSON.parse(JSON.stringify(globalArrayItems[index]));
   globalArrayItemsCopy.push(WeekClone);
 };
 
-export let createCopyGlobalArrayFiltered = (index) => {
+export const createCopyGlobalArrayFiltered = (index) => {
   const WeekClone = JSON.parse(JSON.stringify(globalArrayItems[index]));
   globalArrayItemsCopyFiltered.push(WeekClone);
 };
@@ -212,7 +212,7 @@ export let createCopyGlobalArrayFiltered = (index) => {
  * It uses the functions ID() and chooseItem()
  * @param {date} startingDate the programs current date, used to generate a valid expiration date
  */
-let createNewItem = (startingDate, maxExpDate) => {
+const createNewItem = (startingDate, maxExpDate) => {
   let item = {
     id: ID(),
     name: chooseItem(),
@@ -230,7 +230,7 @@ let createNewItem = (startingDate, maxExpDate) => {
  * Function that changes the status of every item in the global array
  * @param {object} startWeek - every week the program runs
  */
-export let changeStatus = (startWeek, itemLife, week) => {
+export const changeStatus = (startWeek, itemLife, week) => {
   week.forEach((item) => {
     if (startWeek.getTime() > item.expirationDate.getTime()) {
       item.status = "expired";
@@ -248,7 +248,7 @@ export let changeStatus = (startWeek, itemLife, week) => {
 /**
  * Function that remove an item from the global array, if its status is "old" or "expired"
  */
-export let removeItem = (week) => {
+export const removeItem = (week) => {
   for (let i = 0; i < week.length; i++) {
     let item = week[i];
     if (item.status === "old" || item.status === "expired") {
@@ -263,7 +263,7 @@ export let removeItem = (week) => {
  * @param {number} num - the number to be checked
  * @returns {string} " checks" if the number is not 1, " check " otherwise
  */
-let check = (num) => {
+const check = (num) => {
   let control;
   if (num !== 1) {
     control = " checks";
@@ -278,7 +278,7 @@ let check = (num) => {
  * @param {object} d - the date to be padded, given a date format in the configuration object (bonus 3)
  * @returns {object} the date padded
  */
-let paddingDate = (d, lang) => {
+const paddingDate = (d, lang) => {
   let days;
   if (lang === "IT") {
     const mesi = [
@@ -328,7 +328,7 @@ let paddingDate = (d, lang) => {
 
 // NEW FUNCTIONS
 /* PRINT CONTENT */
-export let print = (tableClass, lang, week, i) => {
+export const print = (tableClass, lang, week, i) => {
   let table = document.querySelectorAll(tableClass);
   let tBody = document.createElement("tbody");
   week.forEach((element) => {
@@ -350,10 +350,11 @@ export let print = (tableClass, lang, week, i) => {
 };
 
 /* PRINT TABLES  */
-export let createTable = (tableClass, index) => {
+export const createTable = (tableClass, index) => {
   let title = document.createElement("h5");
   let table = document.createElement("table");
   table.setAttribute("class", tableClass);
+  table.setAttribute("id", `${tableClass}-${index}`);
   title.setAttribute("class", `title-${tableClass}`);
   let thead = document.createElement("thead");
   let tr = document.createElement("tr");
@@ -374,7 +375,7 @@ export let createTable = (tableClass, index) => {
   }
 };
 /* FOR TITLES */
-export let createTitles = (dateWeek, lang, index) => {
+export const createTitles = (dateWeek, lang, index) => {
   let title = document.querySelectorAll(".title-products");
   let filteredTitle = document.querySelectorAll(".title-filtered-products");
 
@@ -382,18 +383,63 @@ export let createTitles = (dateWeek, lang, index) => {
   filteredTitle[index].textContent = "Products filtered";
 };
 
-// NEEDS A FIX
-export const changePrint = (week) => {
-  let table = document.querySelectorAll(tableClass);
-  table[index]
-  let tBody = document.createElement("tbody")
+ //BUTTON HANDLER
+ export const goPreviousWeek = (index) => {
+  let allTitles = document.querySelectorAll(".title-products");
+  let allTables = document.querySelectorAll(".products");
+  let allTablesFiltered = document.querySelectorAll(".filtered-products");
+  let allTitlesFiltered = document.querySelectorAll(
+    ".title-filtered-products"
+  );
+
+  allTables.forEach((element) => element.classList.remove("active"));
+  allTitles.forEach((element) => element.classList.remove("active"));
+  allTablesFiltered.forEach((element) => element.classList.remove("active"));
+  allTitlesFiltered.forEach((element) => element.classList.remove("active"));
+
+  allTables[index].classList.add("active");
+  allTitles[index].classList.add("active");
+  allTablesFiltered[index].classList.add("active");
+  allTitlesFiltered[index].classList.add("active");
+};
+
+export const goNextWeek = (index) => {
+  let allTitles = document.querySelectorAll(".title-products");
+  let allTables = document.querySelectorAll(".products");
+  let allTablesFiltered = document.querySelectorAll(".filtered-products");
+  let allTitlesFiltered = document.querySelectorAll(
+    ".title-filtered-products"
+  );
+
+  allTables.forEach((element) => element.classList.remove("active"));
+  allTitles.forEach((element) => element.classList.remove("active"));
+  allTablesFiltered.forEach((element) => element.classList.remove("active"));
+  allTitlesFiltered.forEach((element) => element.classList.remove("active"));
+
+  allTables[index].classList.add("active");
+  allTitles[index].classList.add("active");
+  allTablesFiltered[index].classList.add("active");
+  allTitlesFiltered[index].classList.add("active");
+};
+
+// PRINT AGAIN FOR BONUS 1
+export const changePrint = (idName, week, lang) => {
+  let tBody = document.querySelector(`#${idName} tbody`);
+  tBody.textContent = "";
   week.forEach((element) => {
     let tr = document.createElement("tr");
     for (let key in element) {
       let td = document.createElement("td");
-      td.textContent = element[key];
+      if (key === "check") {
+        td.textContent = element[key] + check(element[key]);
+      } else if (key === "expirationDate") {
+        let d = new Date(element[key]);
+        td.textContent = paddingDate(d, lang);
+      } else {
+        td.textContent = element[key];
+      }
       tr.appendChild(td);
     }
-    table.appendChild(tr);
+    tBody.appendChild(tr);
   });
 };

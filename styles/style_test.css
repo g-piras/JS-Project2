@@ -18,6 +18,7 @@ table tr th {
     padding: 5px;
     text-align: center;
     width: 15em;
+    cursor: pointer;
 }
 
 table tr td {

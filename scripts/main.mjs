@@ -50,7 +50,7 @@ import * as fn from "./library.mjs"; // functions used in the program
         arrowRight.removeAttribute("disabled");
       }
     }
-    goPreviousWeek(index);
+    fn.goPreviousWeek(index);
   });
   // BUTTON MOVE NEXT WEEK
   arrowRight.addEventListener("click", () => {
@@ -62,74 +62,68 @@ import * as fn from "./library.mjs"; // functions used in the program
         arrowLeft.removeAttribute("disabled");
       }
     }
-    goNextWeek(index);
+    fn.goNextWeek(index);
   });
-
-  //BUTTON HANDLER
-  const goPreviousWeek = (index) => {
-    let allTitles = document.querySelectorAll(".title-products");
-    let allTables = document.querySelectorAll(".products");
-    let allTablesFiltered = document.querySelectorAll(".filtered-products");
-    let allTitlesFiltered = document.querySelectorAll(
-      ".title-filtered-products"
-    );
-
-    allTables.forEach((element) => element.classList.remove("active"));
-    allTitles.forEach((element) => element.classList.remove("active"));
-    allTablesFiltered.forEach((element) => element.classList.remove("active"));
-    allTitlesFiltered.forEach((element) => element.classList.remove("active"));
-
-    allTables[index].classList.add("active");
-    allTitles[index].classList.add("active");
-    allTablesFiltered[index].classList.add("active");
-    allTitlesFiltered[index].classList.add("active");
-  };
-
-  const goNextWeek = (index) => {
-    let allTitles = document.querySelectorAll(".title-products");
-    let allTables = document.querySelectorAll(".products");
-    let allTablesFiltered = document.querySelectorAll(".filtered-products");
-    let allTitlesFiltered = document.querySelectorAll(
-      ".title-filtered-products"
-    );
-
-    allTables.forEach((element) => element.classList.remove("active"));
-    allTitles.forEach((element) => element.classList.remove("active"));
-    allTablesFiltered.forEach((element) => element.classList.remove("active"));
-    allTitlesFiltered.forEach((element) => element.classList.remove("active"));
-
-    allTables[index].classList.add("active");
-    allTitles[index].classList.add("active");
-    allTablesFiltered[index].classList.add("active");
-    allTitlesFiltered[index].classList.add("active");
-  };
 })();
-
-const sortByProduct = (index) => {
-  fn.globalArrayItemsCopy[index].sort((a, b) => (a.name > b.name ? 1 : -1));
-  changePrint(index);
-}
-const sortByStatus = (index) => {
-  fn.globalArrayItemsCopy[index].sort((a, b) => (a.status > b.status ? 1 : -1));
-}
-const sortByExpDate = (index) => {
-  fn.globalArrayItemsCopy[index].sort((a, b) => (getTime(a.expirationDate) > getTime(b.expirationDate) ? 1 : -1));
-}
-const sortByCheck = (index) => { 
-  fn.globalArrayItemsCopy[index].sort((a, b) => (a.check > b.check ? 1 : -1));
-}
-let table = document.querySelectorAll(`.products`);
-
-
-table[0].onclick = () => {
-    let idProduct = document.querySelector(".ID");
-    let nameProduct = document.querySelector(".Name");
-    let statusProduct = document.querySelector(".Status");
-    let expDateProduct = document.querySelector(".Expiration-date");
-    let checkProduct = document.querySelector(".Check");
-
-    nameProduct.addEventListener("click", () => {sortByProduct(0)});
-    statusProduct.addEventListener("click", () => {sortByStatus(0)});
-    expDateProduct.addEventListener("click", () => {sortByExpDate(0)});
-    checkProduct.addEventListener("click", () => {sortByCheck(0)});
+//BONUS 1
+const sortById = (arrayCopy, index, idName, lang) => {
+  arrayCopy[index].sort((a, b) => (a.id > b.id ? 1 : -1));
+  fn.changePrint(idName, arrayCopy[index], lang);
 };
+const sortByProduct = (arrayCopy, index, idName, lang) => {
+  arrayCopy[index].sort((a, b) => (a.name > b.name ? 1 : -1));
+  fn.changePrint(idName, arrayCopy[index], lang);
+};
+const sortByStatus = (arrayCopy, index, idName, lang) => {
+  arrayCopy[index].sort((a, b) => (a.status > b.status ? 1 : -1));
+  fn.changePrint(idName, arrayCopy[index], lang);
+};
+const sortByExpDate = (arrayCopy, index, idName, lang) => {
+  arrayCopy[index].sort((a, b) =>
+    getTime(a.expirationDate) > getTime(b.expirationDate) ? 1 : -1
+  );
+  fn.changePrint(idName, arrayCopy[index], lang);
+};
+const sortByCheck = (arrayCopy, index, idName, lang) => {
+  arrayCopy[index].sort((a, b) => (a.check > b.check ? 1 : -1));
+  fn.changePrint(idName, arrayCopy[index], lang);
+};
+
+let nameId = document.querySelectorAll(".products .ID");
+let nameProduct = document.querySelectorAll(".products .Name");
+let statusProduct = document.querySelectorAll(".products .Status");
+let expDateProduct = document.querySelectorAll(".products .Expiration-date");
+let checkProduct = document.querySelectorAll(".products .Check");
+
+nameId.forEach((element) => {
+  element.addEventListener("click", () => {
+    let idTable = element.parentElement.parentElement.parentElement.id;
+    sortById(fn.globalArrayItemsCopy, 0, idTable, cnf.language);
+  });
+});
+nameProduct.forEach((element) => {
+  element.addEventListener("click", () => {
+    let idTable = element.parentElement.parentElement.parentElement.id;
+    sortByProduct(fn.globalArrayItemsCopy, 0, idTable, cnf.language);
+  });
+});
+statusProduct.forEach((element) => {
+  element.addEventListener("click", () => {
+    let idTable = element.parentElement.parentElement.parentElement.id;
+    sortByStatus(fn.globalArrayItemsCopy, 0, idTable, cnf.language);
+  });
+});
+expDateProduct.forEach((element) => {
+  element.addEventListener("click", () => {
+    let idTable = element.parentElement.parentElement.parentElement.id;
+    sortByExpDate(fn.globalArrayItemsCopy, 0, idTable, cnf.language);
+  });
+});
+checkProduct.forEach((element) => {
+  element.addEventListener("click", () => {
+    let idTable = element.parentElement.parentElement.parentElement.id;
+    sortByCheck(fn.globalArrayItemsCopy, 0, idTable, cnf.language);
+  });
+});
+
+// BONUS 2
