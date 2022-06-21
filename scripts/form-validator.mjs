@@ -8,15 +8,21 @@ import { configurationObject as cnf } from "./config.mjs"; // configuration obje
  * This file checks the data settings submitted by the user
  */
 
-//all the inputs and buttons
+
+//all the inputs
 let startDate = document.getElementById("start-date");
 let daysToWait = document.getElementById("days-to-wait");
 let weeks = document.getElementById("weeks");
 let itemsPerWeek = document.getElementById("items-per-week");
 let itemWeekLife = document.getElementById("item-week-life");
 
+//submit, reset and settings buttons
 let submitButton = document.getElementById("submit-button");
 let resetButton = document.getElementById("reset-button");
+let settingsButton = document.getElementById("settings-button");
+
+//settings panel
+let settingsPanel = document.getElementById("settings-panel");
 
 
 /**
@@ -31,7 +37,6 @@ function printError(input, message) {
 
 /**
  * This function checks if all the data submitted is valid
- * @returns {boolean} - true if the data is correct, false otherwise
  */
 function validateForm() {
 
@@ -115,10 +120,7 @@ function validateForm() {
         }
     }
 
-    if ((startDateErr || daysToWaitErr || weeksErr || itemsPerWeekErr || itemWeekLifeErr)) {
-        return false;
-    }
-    else {
+    if (!(startDateErr || daysToWaitErr || weeksErr || itemsPerWeekErr || itemWeekLifeErr)) {
         //update the configuration object with the new values
         cnf.language = document.getElementById("language").value;
         cnf.startWeek = startDate.value;
@@ -126,6 +128,9 @@ function validateForm() {
         cnf.runWeeks = weeks.value;
         cnf.newItems = itemsPerWeek.value;
         cnf.itemLifeSpan = itemWeekLife.value;
+
+        //hide the settings panel
+        settingsPanel.className = "hidden";
     }
 }
 
@@ -145,7 +150,19 @@ function resetForm() {
     }
 }
 
+/**
+ * This function adds or remove the class "hidden" in the settings panel element
+ */
+function togglePanel() {
+    settingsPanel.classList.toggle("hidden");
+}
 
+
+//when the submit button is clicked
 submitButton.addEventListener('click', validateForm);
+
+//when the reset button is clicked
 resetButton.addEventListener('click', resetForm);
 
+//when the settings button is clicked
+settingsButton.addEventListener("click", togglePanel);
