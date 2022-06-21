@@ -8,6 +8,9 @@
 
 //the global array where the items will be pushed
 export const globalArrayItems = [];
+export const globalArrayItemsCopy = [];
+export const globalArrayItemsCopyFiltered = [];
+export const arrayRemovedItems = [];
 
 //the number from where the unique ID will be incremented
 let sumID = 1;
@@ -18,7 +21,7 @@ let sumID = 1;
  * @param {number} max - the maximum number of the range
  * @returns {number} the random number
  */
-export let randomNumber = (min, max) => {
+export const randomNumber = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
@@ -28,7 +31,7 @@ export let randomNumber = (min, max) => {
  * Function that gets a random item from an array of possible choices
  * @returns {string} the random item chosen
  */
-let chooseItem = () => {
+const chooseItem = () => {
   const possibileItems = [
     "Asparagus",
     "Apples",
@@ -166,7 +169,7 @@ let chooseItem = () => {
  * @returns the unique ID
  */
 // funzione +1 ID ITEM
-let ID = () => {
+const ID = () => {
   let uniqueId = sumID;
   sumID++;
   return uniqueId;
@@ -178,9 +181,31 @@ let ID = () => {
  * @param {date} end the maximum date included
  * @returns {date} a random date between start and end (included)
  */
-let randomDate = (start, end) => {
+const randomDate = (start, end) => {
   let date = new Date(+start + Math.random() * (end - start));
   return date;
+};
+
+export const createNewWeek = (startingDate, maxExpDate, itemsNum, index) => {
+  const week = [];
+  for (let i = 0; i < itemsNum; i++) {
+    week.push(createNewItem(startingDate, maxExpDate));
+  }
+  if (index > 0) {
+    globalArrayItems.push(globalArrayItems[index - 1].concat(week));
+  } else {
+    globalArrayItems.push(week);
+  }
+};
+
+export const createCopyGlobalArray = (index) => {
+  const WeekClone = JSON.parse(JSON.stringify(globalArrayItems[index]));
+  globalArrayItemsCopy.push(WeekClone);
+};
+
+export const createCopyGlobalArrayFiltered = (index) => {
+  const WeekClone = JSON.parse(JSON.stringify(globalArrayItems[index]));
+  globalArrayItemsCopyFiltered.push(WeekClone);
 };
 
 /**
@@ -188,27 +213,26 @@ let randomDate = (start, end) => {
  * It uses the functions ID() and chooseItem()
  * @param {date} startingDate the programs current date, used to generate a valid expiration date
  */
-export let createNewItem = (startingDate, maxExpDate) => {
+const createNewItem = (startingDate, maxExpDate) => {
   let item = {
     id: ID(),
     name: chooseItem(),
     status: "new",
     expirationDate: randomDate(
-      new Date(startingDate).setDate(new Date(startingDate).getDate() - 10),
+      new Date(startingDate).setDate(new Date(startingDate).getDate()),
       maxExpDate
     ),
     check: -1,
   };
-  globalArrayItems.push(item);
+  return item;
 };
 
 /**
  * Function that changes the status of every item in the global array
  * @param {object} startWeek - every week the program runs
  */
-export let changeStatus = (startWeek, itemLife) => {
-  for (let i = 0; i < globalArrayItems.length; i++) {
-    let item = globalArrayItems[i];
+export const changeStatus = (startWeek, itemLife, week) => {
+  week.forEach((item) => {
     if (startWeek.getTime() > item.expirationDate.getTime()) {
       item.status = "expired";
     } else {
@@ -219,17 +243,17 @@ export let changeStatus = (startWeek, itemLife) => {
       }
     }
     item.check++;
-  }
+  });
 };
 
 /**
  * Function that remove an item from the global array, if its status is "old" or "expired"
  */
-export let removeItem = () => {
-  for (let i = 0; i < globalArrayItems.length; i++) {
-    let item = globalArrayItems[i];
+export const removeItem = (week) => {
+  for (let i = 0; i < week.length; i++) {
+    let item = week[i];
     if (item.status === "old" || item.status === "expired") {
-      globalArrayItems.splice(i, 1);
+      week.splice(i, 1);
       i = -1;
     }
   }
@@ -240,7 +264,7 @@ export let removeItem = () => {
  * @param {number} num - the number to be checked
  * @returns {string} " checks" if the number is not 1, " check " otherwise
  */
-let check = (num) => {
+const check = (num) => {
   let control;
   if (num !== 1) {
     control = " checks";
@@ -255,7 +279,7 @@ let check = (num) => {
  * @param {object} d - the date to be padded, given a date format in the configuration object (bonus 3)
  * @returns {object} the date padded
  */
-let paddingDate = (d, lang) => {
+const paddingDate = (d, lang) => {
   let days;
   if (lang === "IT") {
     const mesi = [
@@ -304,9 +328,11 @@ let paddingDate = (d, lang) => {
 };
 
 // NEW FUNCTIONS
-export let print = (tableClass, lang) => {
-  globalArrayItems.forEach((element) => {
-    let table = document.querySelector(tableClass);
+/* PRINT CONTENT */
+export const print = (tableClass, lang, week, i) => {
+  let table = document.querySelectorAll(tableClass);
+  let tBody = document.createElement("tbody");
+  week.forEach((element) => {
     let tr = document.createElement("tr");
     for (let key in element) {
       let td = document.createElement("td");
@@ -318,35 +344,137 @@ export let print = (tableClass, lang) => {
         td.textContent = element[key];
       }
       tr.appendChild(td);
+      tBody.appendChild(tr);
     }
-    table.appendChild(tr);
+    table[i].appendChild(tBody);
   });
 };
 
-export let createTable = (tableClass, dateWeek, lang) => {
+/* PRINT TABLES  */
+export const createTable = (tableClass, index) => {
   let title = document.createElement("h5");
   let table = document.createElement("table");
   table.setAttribute("class", tableClass);
+  table.setAttribute("id", `${tableClass}-${index}`);
   title.setAttribute("class", `title-${tableClass}`);
-  if (tableClass.includes("filtered-products") === true) {
-    title.textContent = "Products filtered";
-  } else {
-    title.textContent = "Week of " + paddingDate(dateWeek, lang);
-  }
+  let thead = document.createElement("thead");
   let tr = document.createElement("tr");
   const keys = ["ID", "Name", "Status", "Expiration-date", "Check"];
   for (let key in keys) {
     let th = document.createElement("th");
     th.textContent = keys[key];
     th.setAttribute("class", keys[key]);
+    thead.appendChild(tr);
     tr.appendChild(th);
   }
-  table.appendChild(tr);
+  table.appendChild(thead);
   document.body.appendChild(title);
   document.body.appendChild(table);
-  if (tableClass.includes("products-0") === true) {
+  if (index === 0) {
     table.classList.add("active");
     title.classList.add("active");
   }
 };
+/* FOR TITLES */
+export const createTitles = (dateWeek, lang, index) => {
+  let title = document.querySelectorAll(".title-products");
+  let filteredTitle = document.querySelectorAll(".title-filtered-products");
 
+  title[index].textContent = "Week of " + paddingDate(dateWeek, lang);
+  filteredTitle[index].textContent = "Products filtered";
+};
+
+//BUTTON HANDLER
+export const goPreviousWeek = (index) => {
+  let allTitles = document.querySelectorAll(".title-products");
+  let allTables = document.querySelectorAll(".products");
+  let allTablesFiltered = document.querySelectorAll(".filtered-products");
+  let allTitlesFiltered = document.querySelectorAll(".title-filtered-products");
+
+  allTables.forEach((element) => element.classList.remove("active"));
+  allTitles.forEach((element) => element.classList.remove("active"));
+  allTablesFiltered.forEach((element) => element.classList.remove("active"));
+  allTitlesFiltered.forEach((element) => element.classList.remove("active"));
+
+  allTables[index].classList.add("active");
+  allTitles[index].classList.add("active");
+  allTablesFiltered[index].classList.add("active");
+  allTitlesFiltered[index].classList.add("active");
+};
+
+export const goNextWeek = (index) => {
+  let allTitles = document.querySelectorAll(".title-products");
+  let allTables = document.querySelectorAll(".products");
+  let allTablesFiltered = document.querySelectorAll(".filtered-products");
+  let allTitlesFiltered = document.querySelectorAll(".title-filtered-products");
+
+  allTables.forEach((element) => element.classList.remove("active"));
+  allTitles.forEach((element) => element.classList.remove("active"));
+  allTablesFiltered.forEach((element) => element.classList.remove("active"));
+  allTitlesFiltered.forEach((element) => element.classList.remove("active"));
+
+  allTables[index].classList.add("active");
+  allTitles[index].classList.add("active");
+  allTablesFiltered[index].classList.add("active");
+  allTitlesFiltered[index].classList.add("active");
+};
+
+// PRINT AGAIN FOR BONUS 1
+export const changePrint = (idName, week, lang) => {
+  let tBody = document.querySelector(`#${idName} tbody`);
+  let trBody = document.querySelectorAll(`#${idName} tbody tr`);
+  let idItem;
+  trBody.forEach((element) => {
+    if (element.className === "hidden") {
+      idItem = element.children[0].textContent;
+    }
+  });
+  tBody.textContent = "";
+  week.forEach((element) => {
+    let tr = document.createElement("tr");
+    for (let key in element) {
+      let td = document.createElement("td");
+      if (key === "check") {
+        td.textContent = element[key] + check(element[key]);
+      } else if (key === "expirationDate") {
+        let d = new Date(element[key]);
+        td.textContent = paddingDate(d, lang);
+      } else {
+        td.textContent = element[key];
+      }
+      tr.appendChild(td);
+      if (key === "id" && element[key] === parseInt(idItem)) {
+        tr.classList.add("hidden");
+      }
+    }
+    tBody.appendChild(tr);
+  });
+};
+
+//BONUS 2
+export const printRemove = (className, element, placeholder) => {
+  let tdStatus = element.querySelector(
+    `.${className} tbody tr td:nth-child(3)`
+  );
+  tdStatus.classList.toggle("removed");
+  if (tdStatus.textContent !== "Removed") {
+    placeholder = tdStatus.textContent;
+    tdStatus.textContent = "Removed";
+  } else {
+    tdStatus.textContent = placeholder;
+  }
+  return placeholder;
+};
+
+export const hideItem = (className, idItem, index, runWeeks) => {
+  for (let i = index + 1; i < runWeeks; i++) {
+    let tdTable = document.querySelectorAll(
+      `#${className}-${i} tbody tr td:nth-child(1)`
+    );
+    tdTable.forEach((element) => {
+      if (element.textContent === idItem) {
+        element.parentElement.classList.toggle("hidden");
+      }
+    });
+  }
+};

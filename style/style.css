@@ -13,12 +13,11 @@ table {
     display: none;
 }
 
-table tr th {
+table thead th {
     background-color: orange;
     padding: 5px;
     text-align: center;
     width: 15em;
-    cursor: pointer;
 }
 
 table tr td {
@@ -39,14 +38,6 @@ h5 {
 
 .active {
     display: block;
-}
-
-.hidden {
-    display: none;
-}
-
-.removed {
-    color: red;
 }
 
 .arrow-left, .arrow-right {
