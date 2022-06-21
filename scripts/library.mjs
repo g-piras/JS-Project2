@@ -5,17 +5,8 @@
  *
  * This file contains all the functions used in the project
  */
-
-//the global array where the items will be pushed
-export const globalArrayItems = [];
-export const globalArrayItemsCopy = [];
-export const globalArrayItemsCopyFiltered = [];
-export const arrayRemovedItems = [];
-
-//the number from where the unique ID will be incremented
-let sumID = 1;
-
-/**
+import { globalValues as glb } from "./global.mjs"; // global object that will be used to store the global values
+/*
  * Function that gets a random number within a given range
  * @param {number} min - the minimum number of the range
  * @param {number} max - the maximum number of the range
@@ -170,8 +161,8 @@ const chooseItem = () => {
  */
 // funzione +1 ID ITEM
 const ID = () => {
-  let uniqueId = sumID;
-  sumID++;
+  let uniqueId = glb.sumID;
+  glb.sumID++;
   return uniqueId;
 };
 
@@ -192,20 +183,20 @@ export const createNewWeek = (startingDate, maxExpDate, itemsNum, index) => {
     week.push(createNewItem(startingDate, maxExpDate));
   }
   if (index > 0) {
-    globalArrayItems.push(globalArrayItems[index - 1].concat(week));
+    glb.globalArrayItems.push(glb.globalArrayItems[index - 1].concat(week));
   } else {
-    globalArrayItems.push(week);
+    glb.globalArrayItems.push(week);
   }
 };
 
 export const createCopyGlobalArray = (index) => {
-  const WeekClone = JSON.parse(JSON.stringify(globalArrayItems[index]));
-  globalArrayItemsCopy.push(WeekClone);
+  const WeekClone = JSON.parse(JSON.stringify(glb.globalArrayItems[index]));
+  glb.globalArrayItemsCopy.push(WeekClone);
 };
 
 export const createCopyGlobalArrayFiltered = (index) => {
-  const WeekClone = JSON.parse(JSON.stringify(globalArrayItems[index]));
-  globalArrayItemsCopyFiltered.push(WeekClone);
+  const WeekClone = JSON.parse(JSON.stringify(glb.globalArrayItems[index]));
+  glb.globalArrayItemsCopyFiltered.push(WeekClone);
 };
 
 /**
@@ -422,13 +413,6 @@ export const goNextWeek = (index) => {
 // PRINT AGAIN FOR BONUS 1
 export const changePrint = (idName, week, lang) => {
   let tBody = document.querySelector(`#${idName} tbody`);
-  let trBody = document.querySelectorAll(`#${idName} tbody tr`);
-  let idItem;
-  trBody.forEach((element) => {
-    if (element.className === "hidden") {
-      idItem = element.children[0].textContent;
-    }
-  });
   tBody.textContent = "";
   week.forEach((element) => {
     let tr = document.createElement("tr");
@@ -443,9 +427,6 @@ export const changePrint = (idName, week, lang) => {
         td.textContent = element[key];
       }
       tr.appendChild(td);
-      if (key === "id" && element[key] === parseInt(idItem)) {
-        tr.classList.add("hidden");
-      }
     }
     tBody.appendChild(tr);
   });
