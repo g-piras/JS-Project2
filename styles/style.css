@@ -52,6 +52,18 @@ nav ul {
     width: 200px;
 }
 
+.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.removed {
+    color: red;
+}
+
 label {
     margin-top: 10px;
 }
@@ -113,17 +125,17 @@ section {
     border-radius: 10px;
 }
 
-section img {
+section img, section button {
     width: 50px;
     position: absolute;
     top: 45%;
 }
 
-section img:first-of-type {
+section img:first-of-type, .previous-week {
     left: -60px;
 }
 
-section img:last-of-type {
+section img:last-of-type, .next-week {
     right: -60px;
 }
 
@@ -150,8 +162,15 @@ section img:last-of-type {
     padding: 10px;
 }
 
+h5 {
+    text-align: center;
+    font-size: 16px;
+    display: none;
+}
+
 table {
     width: 100%;
+    display: none;
 }
 
 td {

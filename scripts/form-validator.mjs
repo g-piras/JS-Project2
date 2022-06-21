@@ -17,9 +17,9 @@ let itemsPerWeek = document.getElementById("items-per-week");
 let itemWeekLife = document.getElementById("item-week-life");
 
 //submit, reset and settings buttons
-let submitButton = document.getElementById("submit-button");
-let resetButton = document.getElementById("reset-button");
-let settingsButton = document.getElementById("settings-button");
+export let submitButton = document.getElementById("submit-button");
+export let resetButton = document.getElementById("reset-button");
+export let settingsButton = document.getElementById("settings-button");
 
 //settings panel
 let settingsPanel = document.getElementById("settings-panel");
@@ -38,7 +38,7 @@ function printError(input, message) {
 /**
  * This function checks if all the data submitted is valid
  */
-function validateForm() {
+export function validateForm() {
 
     let startDateErr = true;
     let daysToWaitErr = true;
@@ -137,7 +137,7 @@ function validateForm() {
 /**
  * This function resets the form by clearing all the inputs and the errors
  */
-function resetForm() {
+export function resetForm() {
     startDate.value = "";
     daysToWait.value = "";
     weeks.value = "";
@@ -153,16 +153,6 @@ function resetForm() {
 /**
  * This function adds or remove the class "hidden" in the settings panel element
  */
-function togglePanel() {
+export function togglePanel() {
     settingsPanel.classList.toggle("hidden");
 }
-
-
-//when the submit button is clicked
-submitButton.addEventListener('click', validateForm);
-
-//when the reset button is clicked
-resetButton.addEventListener('click', resetForm);
-
-//when the settings button is clicked
-settingsButton.addEventListener("click", togglePanel);

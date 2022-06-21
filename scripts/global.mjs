@@ -5,7 +5,7 @@ export const globalValues = {
   sumID: 1,
   maxExpDate: new Date(),
   startWeek: new Date(),
-  arrowLeft: document.querySelector(".arrow-left"),
-  arrowRight: document.querySelector(".arrow-right"),
+  arrowLeft: document.querySelector(".previous-week"),
+  arrowRight: document.querySelector(".next-week"),
   index: 0,
 };

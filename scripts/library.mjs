@@ -343,6 +343,7 @@ export const print = (tableClass, lang, week, i) => {
 
 /* PRINT TABLES  */
 export const createTable = (tableClass, index) => {
+  let container = document.querySelector(".container-products");
   let title = document.createElement("h5");
   let table = document.createElement("table");
   table.setAttribute("class", tableClass);
@@ -359,8 +360,8 @@ export const createTable = (tableClass, index) => {
     tr.appendChild(th);
   }
   table.appendChild(thead);
-  document.body.appendChild(title);
-  document.body.appendChild(table);
+  container.appendChild(title);
+  container.appendChild(table);
   if (index === 0) {
     table.classList.add("active");
     title.classList.add("active");

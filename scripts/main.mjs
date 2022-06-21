@@ -1,13 +1,14 @@
 import { configurationObject as cnf } from "./config.mjs"; // configuration object
 import { globalValues as glb } from "./global.mjs"; // global object that will be used to store the global values
 import * as fn from "./library.mjs"; // functions used in the program
+import * as vld from "./form-validator.mjs"; // functions used in the program
 
 /**
  * Function that delays the output of the program
  * It uses the functions setTimeout(), createNewItem(), changeStatus(),
  * print(), removeItem(), randomDate()
  */
-(() => {
+const startProgram = () => {
   //it sets the starting week of the program as a new date to which are summed a configurated number of days
   glb.startWeek.setDate(glb.startWeek.getDate() + cnf.startingDate);
   //it sets a maximum expiration date for the items as a new date to which are summed the amount of weeks during which the program runs plus an extra week
@@ -44,7 +45,7 @@ import * as fn from "./library.mjs"; // functions used in the program
     if (glb.index === 0) {
       glb.arrowLeft.setAttribute("disabled", "disabled");
     } else {
-      if ( glb.index === cnf.weekNumber - 2) {
+      if (glb.index === cnf.weekNumber - 2) {
         glb.arrowRight.removeAttribute("disabled");
       }
     }
@@ -62,6 +63,18 @@ import * as fn from "./library.mjs"; // functions used in the program
     }
     fn.goNextWeek(glb.index);
   });
+};
+
+(() => {
+  //when the submit button is clicked
+  vld.submitButton.addEventListener("click", vld.validateForm);
+  vld.submitButton.addEventListener("click", startProgram);
+
+  //when the reset button is clicked
+  vld.resetButton.addEventListener("click", vld.resetForm);
+
+  //when the settings button is clicked
+  vld.settingsButton.addEventListener("click", vld.togglePanel);
 })();
 
 //BONUS 1
@@ -79,7 +92,9 @@ let statusProductFiltered = document.querySelectorAll(
 let expDateProductFiltered = document.querySelectorAll(
   ".filtered-products .Expiration-date"
 );
-let checkProductFiltered = document.querySelectorAll(".filtered-products .Check");
+let checkProductFiltered = document.querySelectorAll(
+  ".filtered-products .Check"
+);
 
 const sortById = (arrayCopy, index, idName, lang, cresc) => {
   if (cresc === true) {
@@ -224,15 +239,26 @@ checkProduct.forEach((element) => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
     if (cresc === true) {
-      sortByCheck(glb.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByCheck(
+        glb.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = false;
     } else {
-      sortByCheck(glb.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByCheck(
+        glb.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = true;
     }
   });
 });
-
 
 nameIdFiltered.forEach((element) => {
   let cresc = false;
@@ -332,15 +358,26 @@ checkProductFiltered.forEach((element) => {
     let idTable = element.parentElement.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
     if (cresc === true) {
-      sortByCheck(glb.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByCheck(
+        glb.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = false;
     } else {
-      sortByCheck(glb.globalArrayItemsCopy, index, idTable, cnf.language, cresc);
+      sortByCheck(
+        glb.globalArrayItemsCopy,
+        index,
+        idTable,
+        cnf.language,
+        cresc
+      );
       cresc = true;
     }
   });
 });
-
 
 // BONUS 2
 let trTable = document.querySelectorAll(".products tbody tr");
@@ -362,7 +399,7 @@ trTable.forEach((element) => {
 trFilteredTable.forEach((element) => {
   let placeholder;
   element.addEventListener("click", () => {
-    console.log(element)
+    console.log(element);
     let idTable = element.parentElement.parentElement.id;
     let index = parseInt(idTable.match(/\d/g).join(""));
     placeholder = fn.printRemove("filtered-products", element, placeholder);
