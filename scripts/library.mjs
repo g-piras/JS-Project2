@@ -422,6 +422,13 @@ export const goNextWeek = (index) => {
 // PRINT AGAIN FOR BONUS 1
 export const changePrint = (idName, week, lang) => {
   let tBody = document.querySelector(`#${idName} tbody`);
+  let trBody = document.querySelectorAll(`#${idName} tbody tr`);
+  let idItem;
+  trBody.forEach((element) => {
+    if (element.className === "hidden") {
+      idItem = element.children[0].textContent;
+    }
+  });
   tBody.textContent = "";
   week.forEach((element) => {
     let tr = document.createElement("tr");
@@ -436,6 +443,9 @@ export const changePrint = (idName, week, lang) => {
         td.textContent = element[key];
       }
       tr.appendChild(td);
+      if (key === "id" && element[key] === parseInt(idItem)) {
+        tr.classList.add("hidden");
+      }
     }
     tBody.appendChild(tr);
   });

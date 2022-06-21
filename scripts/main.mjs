@@ -65,6 +65,7 @@ import * as fn from "./library.mjs"; // functions used in the program
     fn.goNextWeek(index);
   });
 })();
+
 //BONUS 1
 const sortById = (arrayCopy, index, idName, lang, cresc) => {
   if (cresc === true) {
@@ -344,7 +345,11 @@ checkProductFiltered.forEach((element) => {
 });
 
 // BONUS 2
-let trTable = document.querySelectorAll(".products tbody tr");
+//fare in modo di riprendere il trtable dopo che ho cliccato col sorting perché devo rifare il queryselectorAll basato sul nuovo Array che ha gli oggetti in posizioni diverse
+
+let  trTable = document.querySelectorAll(".products tbody tr");
+let  trFilteredTable = document.querySelectorAll(".filtered-products tbody tr");
+
 trTable.forEach((element) => {
   let placeholder;
   element.addEventListener("click", () => {
@@ -358,7 +363,6 @@ trTable.forEach((element) => {
   });
 });
 
-let trFilteredTable = document.querySelectorAll(".filtered-products tbody tr");
 trFilteredTable.forEach((element) => {
   let placeholder;
   element.addEventListener("click", () => {
