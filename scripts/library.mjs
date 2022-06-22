@@ -1,7 +1,7 @@
 /**
  * @file : library.js
- * @authors : Gabriele Bovolenta, Luna Diatto, Eloise Giorda, Marco Parisi, Diego Vaschetto
- * @project : Expiry List
+ * @authors : Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
+ * @project : Market
  *
  * This file contains all the functions used in the project
  */
@@ -351,7 +351,7 @@ export const createTable = (tableClass, index) => {
   title.setAttribute("class", `title-${tableClass}`);
   let thead = document.createElement("thead");
   let tr = document.createElement("tr");
-  const keys = ["ID", "Name", "Status", "Expiration-date", "Check"];
+  const keys = ["id", "name", "status", "expirationDate", "check"];
   for (let key in keys) {
     let th = document.createElement("th");
     th.textContent = keys[key];

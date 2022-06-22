@@ -123,11 +123,11 @@ export function validateForm() {
     if (!(startDateErr || daysToWaitErr || weeksErr || itemsPerWeekErr || itemWeekLifeErr)) {
         //update the configuration object with the new values
         cnf.language = document.getElementById("language").value;
-        cnf.startWeek = startDate.value;
-        cnf.startingDate = daysToWait.value;
-        cnf.runWeeks = weeks.value;
-        cnf.newItems = itemsPerWeek.value;
-        cnf.itemLifeSpan = itemWeekLife.value;
+        cnf.startWeek = new Date(startDate.value);
+        cnf.startingDate = parseInt(daysToWait.value);
+        cnf.runWeeks = parseInt(weeks.value);
+        cnf.newItems = parseInt(itemsPerWeek.value);
+        cnf.itemLifeSpan = parseInt(itemWeekLife.value);
 
         //hide the settings panel
         settingsPanel.className = "hidden";
