@@ -17,7 +17,9 @@ const startProgram = () => {
   glb.index = 0;
   glb.sumID = 1;
   glb.arrowLeft = document.querySelector(".previous-week");
+  glb.arrowLeft.disabled = true;
   glb.arrowRight = document.querySelector(".next-week");
+  glb.arrowRight.disabled = false;
   //it sets the starting week of the program as a new date to which are summed a configurated number of days
   glb.maxExpDate = new Date(JSON.parse(JSON.stringify(cnf.startWeek)));
   cnf.startWeek.setDate(cnf.startWeek.getDate() + cnf.startingDate);
