@@ -11,21 +11,28 @@ import * as vld from "./form-validator.mjs"; // functions used in the program
 const startProgram = () => {
   let container = document.querySelector(".container-products");
   container.textContent = "";
-  console.log(cnf.startWeek)
-  console.log(cnf.startingDate)
+  glb.globalArrayItems = [];
+  glb.globalArrayItemsCopy = [];
+  glb.globalArrayItemsCopyFiltered = [];
+  glb.index = 0;
+  glb.sumID = 1;
+  glb.arrowLeft = document.querySelector(".previous-week");
+  glb.arrowRight = document.querySelector(".next-week");
   //it sets the starting week of the program as a new date to which are summed a configurated number of days
-  console.log(new Date(cnf.startWeek.setDate(cnf.startWeek.getDate() + cnf.startingDate)));
+  glb.maxExpDate = new Date(JSON.parse(JSON.stringify(cnf.startWeek)));
+  cnf.startWeek.setDate(cnf.startWeek.getDate() + cnf.startingDate);
   //it sets a maximum expiration date for the items as a new date to which are summed the amount of weeks during which the program runs plus an extra week
   glb.maxExpDate.setDate(
     glb.maxExpDate.getDate() + (cnf.dayWeek * cnf.runWeeks + cnf.dayWeek)
-  );
-  // CREATE TABLES BASED ON HOW MANY WEEKS THERE ARE
-  for (let i = 0; i < cnf.runWeeks; i++) {
-    fn.createTable(`products`, i);
-    fn.createTable(`filtered-products`, i);
-  }
-  // CREATES TITLES, PRINTS TABLES, CREATES ITEMS; CHANGES STATUS; REMOVES ITEMS, CREATES TWO ARRAY (FILTERED + NOT FILTERED) AND CHANGES WEEK DATE
-  for (let i = 0; i < cnf.runWeeks; i++) {
+    );
+    
+    // CREATE TABLES BASED ON HOW MANY WEEKS THERE ARE
+    for (let i = 0; i < cnf.runWeeks; i++) {
+      fn.createTable(`products`, i);
+      fn.createTable(`filtered-products`, i);
+    }
+    // CREATES TITLES, PRINTS TABLES, CREATES ITEMS; CHANGES STATUS; REMOVES ITEMS, CREATES TWO ARRAY (FILTERED + NOT FILTERED) AND CHANGES WEEK DATE
+    for (let i = 0; i < cnf.runWeeks; i++) {
     fn.createTitles(cnf.startWeek, cnf.language, i);
     fn.createNewWeek(
       cnf.startWeek,
@@ -43,30 +50,6 @@ const startProgram = () => {
     cnf.startWeek.setDate(cnf.startWeek.getDate() + cnf.dayWeek);
   }
 
-  // BUTTON MOVE PREVIOUS WEEK
-  glb.arrowLeft.addEventListener("click", () => {
-    glb.index--;
-    if (glb.index === 0) {
-      glb.arrowLeft.setAttribute("disabled", "disabled");
-    } else {
-      if (glb.index === cnf.weekNumber - 2) {
-        glb.arrowRight.removeAttribute("disabled");
-      }
-    }
-    fn.goPreviousWeek(glb.index);
-  });
-  // BUTTON MOVE NEXT WEEK
-  glb.arrowRight.addEventListener("click", () => {
-    glb.index++;
-    if (glb.index === cnf.runWeeks - 1) {
-      glb.arrowRight.setAttribute("disabled", "disabled");
-    } else {
-      if (glb.index === 1) {
-        glb.arrowLeft.removeAttribute("disabled");
-      }
-    }
-    fn.goNextWeek(glb.index);
-  });
 
   //BONUS 1
   // OBJECT FOR ASCENDING DESCENDING ITEMS ORDER TABLE
@@ -77,7 +60,7 @@ const startProgram = () => {
     expirationDate: true,
     check: true,
   };
-    // OBJECT FOR ASCENDING DESCENDING ITEMS ORDER FILTERED TABLE
+  // OBJECT FOR ASCENDING DESCENDING ITEMS ORDER FILTERED TABLE
   const flagFilterdObj = {
     id: false,
     name: true,
@@ -86,7 +69,14 @@ const startProgram = () => {
     check: true,
   };
   // SORTING FUNCTION
-  const sortByElement = (arrayCopy, index, idName, lang, targetColumn, referenceObj) => {
+  const sortByElement = (
+    arrayCopy,
+    index,
+    idName,
+    lang,
+    targetColumn,
+    referenceObj
+  ) => {
     if (referenceObj[targetColumn] === true) {
       arrayCopy[index].sort((a, b) =>
         a[targetColumn] > b[targetColumn] ? 1 : -1
@@ -170,8 +160,10 @@ const startProgram = () => {
   });
 };
 
-startProgram();
 (() => {
+
+  //START PROGRAM AUTOMATICALLY AT LOADING OF THE PAGE
+  window.addEventListener("load", startProgram);
   //when the submit button is clicked
   vld.submitButton.addEventListener("click", vld.validateForm);
   vld.submitButton.addEventListener("click", startProgram);
@@ -181,4 +173,32 @@ startProgram();
 
   //when the settings button is clicked
   vld.settingsButton.addEventListener("click", vld.togglePanel);
+
+  // BUTTONS 
+  // BUTTON MOVE PREVIOUS WEEK
+  glb.arrowLeft.addEventListener("click", () => {
+    console.log(glb.index)
+    glb.index--;
+    if (glb.index === 0) {
+      glb.arrowLeft.setAttribute("disabled", "disabled");
+    } else {
+      if (glb.index === cnf.weekNumber - 2) {
+        glb.arrowRight.removeAttribute("disabled");
+      }
+    }
+    fn.goPreviousWeek(glb.index);
+  });
+  // BUTTON MOVE NEXT WEEK
+  glb.arrowRight.addEventListener("click", () => {
+    console.log(glb.index)
+    glb.index++;
+    if (glb.index === cnf.runWeeks - 1) {
+      glb.arrowRight.setAttribute("disabled", "disabled");
+    } else {
+      if (glb.index === 1) {
+        glb.arrowLeft.removeAttribute("disabled");
+      }
+    }
+    fn.goNextWeek(glb.index);
+  });
 })();

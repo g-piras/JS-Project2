@@ -371,7 +371,7 @@ export const createTable = (tableClass, index) => {
 export const createTitles = (dateWeek, lang, index) => {
   let title = document.querySelectorAll(".title-products");
   let filteredTitle = document.querySelectorAll(".title-filtered-products");
-
+  
   title[index].textContent = "Week of " + paddingDate(dateWeek, lang);
   filteredTitle[index].textContent = "Products filtered";
 };
