@@ -131,12 +131,18 @@ section img, section button {
     top: 45%;
 }
 
+.previous-week, .next-week {
+    height: 5em;
+    width: 5em;
+    border-radius: 50%;
+}
+
 section img:first-of-type, .previous-week {
-    left: -60px;
+    left: -100px;
 }
 
 section img:last-of-type, .next-week {
-    right: -60px;
+    right: -100px;
 }
 
 .info {
@@ -230,4 +236,12 @@ tbody tr {
 
 tbody tr:nth-of-type(odd) {
     background-color: rgb(245, 232, 207);
+}
+
+.title-filtered-products, .title-products {
+    text-align: center;
+    width: 100%;
+    color: white;
+    background-color: #237297;
+    height: 2em;
 }

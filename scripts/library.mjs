@@ -377,24 +377,7 @@ export const createTitles = (dateWeek, lang, index) => {
 };
 
 //BUTTON HANDLER
-export const goPreviousWeek = (index) => {
-  let allTitles = document.querySelectorAll(".title-products");
-  let allTables = document.querySelectorAll(".products");
-  let allTablesFiltered = document.querySelectorAll(".filtered-products");
-  let allTitlesFiltered = document.querySelectorAll(".title-filtered-products");
-
-  allTables.forEach((element) => element.classList.remove("active"));
-  allTitles.forEach((element) => element.classList.remove("active"));
-  allTablesFiltered.forEach((element) => element.classList.remove("active"));
-  allTitlesFiltered.forEach((element) => element.classList.remove("active"));
-
-  allTables[index].classList.add("active");
-  allTitles[index].classList.add("active");
-  allTablesFiltered[index].classList.add("active");
-  allTitlesFiltered[index].classList.add("active");
-};
-
-export const goNextWeek = (index) => {
+export const changeShowingWeek = (index) => {
   let allTitles = document.querySelectorAll(".title-products");
   let allTables = document.querySelectorAll(".products");
   let allTablesFiltered = document.querySelectorAll(".filtered-products");

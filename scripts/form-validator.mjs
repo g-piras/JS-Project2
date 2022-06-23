@@ -127,7 +127,7 @@ export function validateForm() {
         cnf.startingDate = parseInt(daysToWait.value);
         cnf.runWeeks = parseInt(weeks.value);
         cnf.newItems = parseInt(itemsPerWeek.value);
-        cnf.itemLifeSpan = parseInt(itemWeekLife.value);
+        cnf.itemLifeSpan = parseInt(itemWeekLife.value)-1;
 
         //hide the settings panel
         settingsPanel.className = "hidden";

@@ -9,6 +9,7 @@ import * as vld from "./form-validator.mjs"; // functions used in the program
  * print(), removeItem(), randomDate()
  */
 const startProgram = () => {
+  //RESETS TO RESTART THE TABLE ON CLICK
   let container = document.querySelector(".container-products");
   container.textContent = "";
   glb.globalArrayItems = [];
@@ -20,8 +21,8 @@ const startProgram = () => {
   glb.arrowLeft.disabled = true;
   glb.arrowRight = document.querySelector(".next-week");
   glb.arrowRight.disabled = false;
-  //it sets the starting week of the program as a new date to which are summed a configurated number of days
   glb.maxExpDate = new Date(JSON.parse(JSON.stringify(cnf.startWeek)));
+  //it sets the starting week of the program as a new date to which are summed a configurated number of days
   cnf.startWeek.setDate(cnf.startWeek.getDate() + cnf.startingDate);
   //it sets a maximum expiration date for the items as a new date to which are summed the amount of weeks during which the program runs plus an extra week
   glb.maxExpDate.setDate(
@@ -162,6 +163,7 @@ const startProgram = () => {
   });
 };
 
+//IIFE
 (() => {
 
   //START PROGRAM AUTOMATICALLY AT LOADING OF THE PAGE
@@ -188,7 +190,7 @@ const startProgram = () => {
         glb.arrowRight.removeAttribute("disabled");
       }
     }
-    fn.goPreviousWeek(glb.index);
+    fn.changeShowingWeek(glb.index);
   });
   // BUTTON MOVE NEXT WEEK
   glb.arrowRight.addEventListener("click", () => {
@@ -201,6 +203,6 @@ const startProgram = () => {
         glb.arrowLeft.removeAttribute("disabled");
       }
     }
-    fn.goNextWeek(glb.index);
+    fn.changeShowingWeek(glb.index);
   });
 })();
