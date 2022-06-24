@@ -255,7 +255,7 @@ export const removeItem = (week) => {
  * @param {number} num - the number to be checked
  * @returns {string} " checks" if the number is not 1, " check " otherwise
  */
-const check = (num) => {
+export const check = (num) => {
   let control;
   if (num !== 1) {
     control = " checks";
@@ -270,7 +270,7 @@ const check = (num) => {
  * @param {object} d - the date to be padded, given a date format in the configuration object (bonus 3)
  * @returns {object} the date padded
  */
-const paddingDate = (d, lang) => {
+export const paddingDate = (d, lang) => {
   let days;
   if (lang === "IT") {
     const mesi = [
@@ -319,28 +319,6 @@ const paddingDate = (d, lang) => {
 };
 
 // NEW FUNCTIONS
-/* PRINT CONTENT */
-export const print = (tableClass, lang, week, i) => {
-  let table = document.querySelectorAll(tableClass);
-  let tBody = document.createElement("tbody");
-  week.forEach((element) => {
-    let tr = document.createElement("tr");
-    for (let key in element) {
-      let td = document.createElement("td");
-      if (key === "check") {
-        td.textContent = element[key] + check(element[key]);
-      } else if (key === "expirationDate") {
-        td.textContent = paddingDate(element[key], lang);
-      } else {
-        td.textContent = element[key];
-      }
-      tr.appendChild(td);
-      tBody.appendChild(tr);
-    }
-    table[i].appendChild(tBody);
-  });
-};
-
 /* PRINT TABLES  */
 export const createTable = (tableClass, index) => {
   let container = document.querySelector(".container-products");
@@ -367,6 +345,28 @@ export const createTable = (tableClass, index) => {
     title.classList.add("active");
   }
 };
+
+/* PRINT CONTENT */
+export const print = (tableClass, lang, week, i) => {
+  let table = document.querySelectorAll(tableClass);
+  let tBody = document.createElement("tbody");
+  week.forEach((element) => {
+    let tr = document.createElement("tr");
+    for (let key in element) {
+      let td = document.createElement("td");
+      if (key === "check") {
+        td.textContent = element[key] + check(element[key]);
+      } else if (key === "expirationDate") {
+        td.textContent = paddingDate(element[key], lang);
+      } else {
+        td.textContent = element[key];
+      }
+      tr.appendChild(td);
+      tBody.appendChild(tr);
+    }
+    table[i].appendChild(tBody);
+  });
+};
 /* FOR TITLES */
 export const createTitles = (dateWeek, lang, index) => {
   let title = document.querySelectorAll(".title-products");
@@ -392,54 +392,4 @@ export const changeShowingWeek = (index) => {
   allTitles[index].classList.add("active");
   allTablesFiltered[index].classList.add("active");
   allTitlesFiltered[index].classList.add("active");
-};
-
-// PRINT AGAIN FOR BONUS 1
-export const changePrint = (idName, week, lang) => {
-  let tBody = document.querySelector(`#${idName} tbody`);
-  tBody.textContent = "";
-  week.forEach((element) => {
-    let tr = document.createElement("tr");
-    for (let key in element) {
-      let td = document.createElement("td");
-      if (key === "check") {
-        td.textContent = element[key] + check(element[key]);
-      } else if (key === "expirationDate") {
-        let d = new Date(element[key]);
-        td.textContent = paddingDate(d, lang);
-      } else {
-        td.textContent = element[key];
-      }
-      tr.appendChild(td);
-    }
-    tBody.appendChild(tr);
-  });
-};
-
-//BONUS 2
-export const printRemove = (className, element, placeholder) => {
-  let tdStatus = element.querySelector(
-    `.${className} tbody tr td:nth-child(3)`
-  );
-  tdStatus.classList.toggle("removed");
-  if (tdStatus.textContent !== "Removed") {
-    placeholder = tdStatus.textContent;
-    tdStatus.textContent = "Removed";
-  } else {
-    tdStatus.textContent = placeholder;
-  }
-  return placeholder;
-};
-
-export const hideItem = (className, idItem, index, runWeeks) => {
-  for (let i = index + 1; i < runWeeks; i++) {
-    let tdTable = document.querySelectorAll(
-      `#${className}-${i} tbody tr td:nth-child(1)`
-    );
-    tdTable.forEach((element) => {
-      if (element.textContent === idItem) {
-        element.parentElement.classList.toggle("hidden");
-      }
-    });
-  }
 };

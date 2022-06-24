@@ -1,4 +1,4 @@
-import { configurationObject as cnf } from "./config.mjs"; // configuration object
+import { configurationObject as cnf } from "../config.mjs"; // configuration object
 
 /**
  * @file : form-validator.js
