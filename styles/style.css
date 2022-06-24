@@ -5,24 +5,35 @@
  * 
  * This file contains the CSS applied to the index.html page
  */
- * {
+html {
     font-family: 'Roboto', sans-serif;
 }
+
 body {
     background-image: url("../images/Predawn.jpg");
     background-size: cover;
     color: #322823;
 }
 
+
+/**
+ * Style for the header
+ */
 li img[alt="market icon"] {
     width: 60px;
 }
 
-li img[alt="settings icon"] {
+#settings-button img {
     width: 30px;
+    transition: transform 1s;
 }
-li img[alt="settings icon"]:hover {
+
+#settings-button:hover {
     cursor: pointer;
+}
+
+#settings-button:hover img {
+    transform: rotate(180deg);
 }
 
 li:last-of-type {
@@ -41,9 +52,10 @@ nav ul {
     height: 70px;
 }
 
-#settings-panel {
-    display: none;
-}
+
+/**
+ * Style for the settings panel
+ */
 
 .box-input {
     display: flex;
@@ -52,23 +64,12 @@ nav ul {
     width: 200px;
 }
 
-.active {
-    display: block;
-}
-
-.hidden {
-    display: none;
-}
-
-.removed {
-    color: red;
-}
-
 label {
     margin-top: 10px;
 }
 
-label, select {
+label,
+select {
     margin-bottom: 10px;
 }
 
@@ -88,10 +89,6 @@ input[type="reset"] {
 input[type="reset"] {
     left: 0;
 }
-
-/* input[name="settings"] {
-    display: none;
-} */
 
 #settings-panel {
     position: absolute;
@@ -116,79 +113,97 @@ input[type="reset"] {
     font-weight: bold;
 }
 
+
+/**
+ * Style for the section with the tables
+ */
 section {
     position: relative;
     background-color: white;
     width: 65%;
     height: 500px;
     margin: 5% auto;
+    padding-top: 1px;
     border-radius: 10px;
 }
 
-section img, section button {
-    width: 50px;
+section button {
     position: absolute;
     top: 45%;
 }
 
-.previous-week, .next-week {
-    height: 5em;
-    width: 5em;
+.previous-week,
+.next-week {
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
+    font-size: 40px;
 }
 
-section img:first-of-type, .previous-week {
-    left: -100px;
+.previous-week {
+    left: -90px;
 }
 
-section img:last-of-type, .next-week {
-    right: -100px;
-}
-
-.info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #237297;
-    color: white;
-    border-radius: 10px;
-    font-size: 1.6em;
-    height: 50px;
+.next-week {
+    right: -90px;
 }
 
 .week-items,
 .filtered-items {
     margin: 10px 10px 5px 10px;
     border-radius: 10px;
-
-}
-
-.week-items span,
-.filtered-items span {
-    padding: 10px;
 }
 
 h5 {
     text-align: center;
-    font-size: 16px;
+    font-size: 20px;
     display: none;
 }
 
+
+/**
+ * Style for the titles of tables
+ */
+.title-filtered-products,
+.title-products {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: center;
+    width: 100%;
+    color: white;
+    background-color: #237297;
+    height: 2em;
+}
+
+h5.title-filtered-products {
+    margin-top: 10px;
+}
+
+h5.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/**
+ * Style for the tables with the items
+ */
 table {
     width: 100%;
     display: none;
 }
 
-td {
+td,
+th {
     text-align: center;
 }
 
-thead th:last-of-type,
-tbody tr td:last-of-type {
-    padding-right: 30px;
-}
-
-thead, tbody, tr, th, td {
+thead,
+tbody,
+tr,
+th,
+td {
     display: block;
 }
 
@@ -202,7 +217,8 @@ thead tr {
     width: calc(100% - 16px);
 }
 
-thead th {
+thead th,
+tbody tr td {
     padding-top: 7px;
     padding-bottom: 7px;
 }
@@ -213,20 +229,15 @@ tbody {
     overflow-x: hidden;
 }
 
-tbody td, thead th {
+tbody td,
+thead th {
     width: 19%;
     float: left;
 }
 
-tbody tr td{
-    padding-top: 7px;
-    padding-bottom: 7px;
-}
-
-tr:after {  /* clearing float */
+tr:after {
     content: ' ';
     display: block;
-    visibility: hidden;
     clear: both;
 }
 
@@ -238,10 +249,22 @@ tbody tr:nth-of-type(odd) {
     background-color: rgb(245, 232, 207);
 }
 
-.title-filtered-products, .title-products {
-    text-align: center;
-    width: 100%;
-    color: white;
-    background-color: #237297;
-    height: 2em;
+tbody tr:nth-of-type(even) {
+    background-color: rgb(245, 236, 236);
+}
+
+
+/**
+ * Style for the status classes
+ */
+.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.removed {
+    color: red;
 }
