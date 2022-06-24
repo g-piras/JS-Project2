@@ -41,7 +41,7 @@ nav ul {
     height: 70px;
 }
 
-.settings-panel {
+#settings-panel {
     display: none;
 }
 
@@ -49,15 +49,33 @@ nav ul {
     display: flex;
     position: relative;
     flex-direction: column;
+    width: 200px;
 }
 
-input, label, select {
+.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.removed {
+    color: red;
+}
+
+label {
+    margin-top: 10px;
+}
+
+label, select {
     margin-bottom: 10px;
 }
 
-input[type="submit"] {
+input[type="submit"],
+input[type="reset"] {
     position: absolute;
-    bottom: -45px;
+    bottom: -35px;
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -67,11 +85,15 @@ input[type="submit"] {
     align-self: flex-end;
 }
 
-#settings {
-    display: none;
+input[type="reset"] {
+    left: 0;
 }
 
-#settings:checked ~ .settings-panel {
+/* input[name="settings"] {
+    display: none;
+} */
+
+#settings-panel {
     position: absolute;
     top: 70px;
     width: 100%;
@@ -79,10 +101,14 @@ input[type="submit"] {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    height: 210px;
+    height: 250px;
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
     z-index: 1;
+}
+
+#settings-panel.hidden {
+    display: none;
 }
 
 .error-message {
@@ -99,18 +125,24 @@ section {
     border-radius: 10px;
 }
 
-section img {
+section img, section button {
     width: 50px;
     position: absolute;
     top: 45%;
 }
 
-section img:first-of-type {
-    left: -60px;
+.previous-week, .next-week {
+    height: 5em;
+    width: 5em;
+    border-radius: 50%;
 }
 
-section img:last-of-type {
-    right: -60px;
+section img:first-of-type, .previous-week {
+    left: -100px;
+}
+
+section img:last-of-type, .next-week {
+    right: -100px;
 }
 
 .info {
@@ -136,8 +168,15 @@ section img:last-of-type {
     padding: 10px;
 }
 
+h5 {
+    text-align: center;
+    font-size: 16px;
+    display: none;
+}
+
 table {
     width: 100%;
+    display: none;
 }
 
 td {
@@ -197,4 +236,12 @@ tbody tr {
 
 tbody tr:nth-of-type(odd) {
     background-color: rgb(245, 232, 207);
+}
+
+.title-filtered-products, .title-products {
+    text-align: center;
+    width: 100%;
+    color: white;
+    background-color: #237297;
+    height: 2em;
 }

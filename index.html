@@ -6,13 +6,16 @@
         <title>Market Project</title>
         <meta name="description" content="Market project" />
         <meta name="authors" content="Lombardo, Parisi, Piras, Trabbia" />
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
+            rel="stylesheet"
+        />
         <link rel="stylesheet" href="./styles/reset.css" />
         <link rel="stylesheet" href="./styles/style.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="icon" type="image/x-icon" href="./images/market.png">
-        
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="icon" type="image/x-icon" href="./images/market.png" />
+
         <!--End of the header-->
     </head>
     <body>
@@ -25,207 +28,97 @@
                         <h1>MARKET PROJECT - A weekly product dashboard</h1>
                     </li>
                     <li>
-                        <label for="settings">
+                        <button id="settings-button">
                             <img
                                 src="./images/settings-icon.svg"
                                 alt="settings icon"
                             />
-                        </label>
+                        </button>
                     </li>
                 </ul>
             </nav>
         </header>
 
-        <input type="checkbox" name="settings" id="settings">
+        <!-- <input type="checkbox" name="settings" id="settings" /> -->
 
-        <div class="settings-panel">
+        <div class="hidden" id="settings-panel">
             <div class="box-input">
                 <label for="start-date">Start date:</label>
-                <input type="date" id="start-date" name="start-date"/>
+                <input type="date" id="start-date" name="start-date" required />
+                <div class="error-message" id="startDateErr"></div>
                 <label for="days-to-wait">Days to wait:</label>
-                <input type="number" id="days-to-wait" name="days-to-wait"/>
+                <input
+                    type="number"
+                    id="days-to-wait"
+                    name="days-to-wait"
+                    required
+                />
+                <span class="error-message" id="daysToWaitErr"></span>
             </div>
-                
+
             <div class="box-input">
                 <label for="weeks">Weeks:</label>
-                <input type="number" id="weeks" name="weeks"/>
+                <input type="number" id="weeks" name="weeks" min="1" required />
+                <div class="error-message" id="weeksErr"></div>
                 <label for="items-per-week">Items per week:</label>
-                <input type="number" id="items-per-week" name="items-per-week"/>
+                <input
+                    type="number"
+                    id="items-per-week"
+                    name="items-per-week"
+                    min="1"
+                    required
+                />
+                <div class="error-message" id="itemsPerWeekErr"></div>
             </div>
-        
+
             <div class="box-input">
                 <label for="item-week-life">Item week life:</label>
-                <input type="number" id="item-week-life" name="item-week-life"/>
+                <input
+                    type="number"
+                    id="item-week-life"
+                    name="item-week-life"
+                    min="1"
+                    required
+                />
+                <div class="error-message" id="itemWeekLifeErr"></div>
                 <label for="language">Language</label>
                 <select name="language" id="language">
-                    <option value="english">English</option>
-                    <option value="italian">Italian</option>
+                    <option value="EN">English</option>
+                    <option value="IT">Italian</option>
                 </select>
                 <!--button to save settings-->
-                <input type="submit" value="Save settings" id="submit-button"/>
-            </div>  
+                <input type="reset" value="Reset" id="reset-button" />
+                <input type="submit" value="Save settings" id="submit-button" />
+            </div>
         </div>
 
         <main>
-
             <section>
-                <img src="./images/left-arrow.png" 
-                    alt="right arrow" 
+                <button class="previous-week" disabled>
+                <img
+                    src="./images/left-arrow.png"
+                    alt="right arrow"
                     title="previous week"
-                    class="previous-week"
                 />
-
+            </button>
                 <!-- test tables -->
                 <div class="week-items">
-                    <div class="info">
-                        <span class="week-number">Prova 1</span>
-                        <span class="week-date">11-JUNE-2022</span>
+                    <div class="container-products">
+                        
                     </div>
-                    <table class="all-week-products">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Expiry date</th>
-                                <th>Status</th>
-                                <th>Checks</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
-
-                <div class="filtered-items">
-                    <div class="info">
-                        <span class="week-number">Filtered</span>
-                    </div>
-                    <table class="filtered-week-products">
-                        <thead>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Expiry date</th>
-                            <th>Status</th>
-                            <th>Checks</th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <img src="./images/right-arrow.png" 
-                    alt="right arrow" 
+                <button class="next-week">
+                <img
+                    src="./images/right-arrow.png"
+                    alt="right arrow"
                     title="next week"
-                    class="next-week"
                 />
+                </button>
             </section>
-
         </main>
 
         <!--Js files called-->
-        <!-- <script src="./scripts/manager.js"></script>
-        <script src="./scripts/variables.js"></script>
-        <script src="./scripts/library.js"></script>
-        <script src="./scripts/main.js"></script> -->
-        <script src="./scripts/form-validator.js"></script>
+        <script type="module" src="./scripts/main.mjs"></script>
         <!--End of the body-->
     </body>
 </html>
