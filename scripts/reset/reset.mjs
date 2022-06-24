@@ -1,8 +1,17 @@
-import { globalValues as glb } from "../global.mjs";
+/**
+ * @file : reset.js
+ * @authors : Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
+ * @project : Market
+ *
+ * This file contains the configuration Object with all the rules of the supermarket manager
+ */
+import { globalValues as glb } from "../global.mjs"; // import the global values
 import { configurationObject as cnf } from "../config.mjs"; // configuration object
 
+/**
+ * function that resets various values to their default values
+ */
 export const resetTable = () => {
-  //RESETS TO RESTART THE TABLE ON CLICK
   let container = document.querySelector(".container-products");
   container.textContent = "";
   glb.globalArrayItems = [];
