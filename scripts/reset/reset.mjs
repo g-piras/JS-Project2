@@ -13,6 +13,8 @@ export const resetTable = () => {
   glb.arrowLeft = document.querySelector(".previous-week");
   glb.arrowLeft.disabled = true;
   glb.arrowRight = document.querySelector(".next-week");
-  glb.arrowRight.disabled = false;
+  glb.arrowRight.disabled = false;  // forse un problema qui
   glb.maxExpDate = new Date(JSON.parse(JSON.stringify(cnf.startWeek)));
 };
+
+

@@ -1,3 +1,4 @@
+
 import { configurationObject as cnf } from "./config.mjs"; // configuration object
 import { globalValues as glb } from "./global.mjs"; // global object that will be used to store the global values
 import { resetTable } from "./reset/reset.mjs"; // reset Table when changing settings
@@ -105,11 +106,13 @@ const startProgram = () => {
   // BUTTON MOVE PREVIOUS WEEK
   glb.arrowLeft.addEventListener("click", () => {
     glb.index--;
+    
     if (glb.index === 0) {
       glb.arrowLeft.setAttribute("disabled", "disabled");
     } else {
-      if (glb.index === cnf.weekNumber - 2) {
+      if (glb.index === cnf.runWeeks - 2) {
         glb.arrowRight.removeAttribute("disabled");
+      
       }
     }
     fn.changeShowingWeek(glb.index);
@@ -119,11 +122,15 @@ const startProgram = () => {
     glb.index++;
     if (glb.index === cnf.runWeeks - 1) {
       glb.arrowRight.setAttribute("disabled", "disabled");
+      // console.log(glb.index);
+      
     } else {
       if (glb.index === 1) {
         glb.arrowLeft.removeAttribute("disabled");
       }
     }
+    
+
     fn.changeShowingWeek(glb.index);
   });
 })();
