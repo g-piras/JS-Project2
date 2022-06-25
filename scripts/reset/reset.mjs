@@ -29,3 +29,5 @@ export const resetTable = () => {
   glb.arrowRight.disabled = false;
   glb.maxExpDate = new Date(JSON.parse(JSON.stringify(cnf.startWeek)));
 };
+
+
