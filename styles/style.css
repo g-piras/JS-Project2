@@ -5,9 +5,10 @@
  * 
  * This file contains the CSS applied to the index.html page
  */
- * {
+* {
     font-family: 'Roboto', sans-serif;
 }
+
 body {
     background-image: url("../images/Predawn.jpg");
     background-size: cover;
@@ -21,6 +22,7 @@ li img[alt="market icon"] {
 li img[alt="settings icon"] {
     width: 30px;
 }
+
 li img[alt="settings icon"]:hover {
     cursor: pointer;
 }
@@ -43,6 +45,11 @@ nav ul {
 
 #settings-panel {
     display: none;
+}
+
+#settings-button,
+img {
+    display: flex;
 }
 
 .box-input {
@@ -68,7 +75,8 @@ label {
     margin-top: 10px;
 }
 
-label, select {
+label,
+select {
     margin-bottom: 10px;
 }
 
@@ -117,32 +125,58 @@ input[type="reset"] {
 }
 
 section {
+
     position: relative;
     background-color: white;
     width: 65%;
     height: 500px;
     margin: 5% auto;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-section img, section button {
+section img,
+section button {
     width: 50px;
-    position: absolute;
-    top: 45%;
+    display: flex;
+    align-self: center;
+    top: 43%;
+    justify-content: center;
 }
 
-.previous-week, .next-week {
+
+
+.previous-week,
+.next-week {
+    position: absolute;
     height: 5em;
     width: 5em;
     border-radius: 50%;
 }
 
-section img:first-of-type, .previous-week {
-    left: -100px;
+
+
+section img:first-of-type,
+.previous-week {
+    left: -50px;
+    z-index: 1;
+    transition: all 0.2s ease-in-out;
 }
 
-section img:last-of-type, .next-week {
-    right: -100px;
+section img:last-of-type,
+.next-week {
+    right: -50px;
+    transition: all 0.2s ease-in-out;
+}
+
+
+
+.next-week:hover,
+.previous-week:hover {
+    height: 5.4em;
+    width: 5.4em;
 }
 
 .info {
@@ -169,6 +203,8 @@ section img:last-of-type, .next-week {
 }
 
 h5 {
+    padding-top: 8px;
+    position: relative;
     text-align: center;
     font-size: 16px;
     display: none;
@@ -188,7 +224,11 @@ tbody tr td:last-of-type {
     padding-right: 30px;
 }
 
-thead, tbody, tr, th, td {
+thead,
+tbody,
+tr,
+th,
+td {
     display: block;
 }
 
@@ -213,17 +253,19 @@ tbody {
     overflow-x: hidden;
 }
 
-tbody td, thead th {
+tbody td,
+thead th {
     width: 19%;
     float: left;
 }
 
-tbody tr td{
+tbody tr td {
     padding-top: 7px;
     padding-bottom: 7px;
 }
 
-tr:after {  /* clearing float */
+tr:after {
+    /* clearing float */
     content: ' ';
     display: block;
     visibility: hidden;
@@ -238,8 +280,8 @@ tbody tr:nth-of-type(odd) {
     background-color: rgb(245, 232, 207);
 }
 
-.title-filtered-products, .title-products {
-    text-align: center;
+.title-filtered-products,
+.title-products {
     width: 100%;
     color: white;
     background-color: #237297;
