@@ -6,7 +6,7 @@
  */
 
 /**
- * This file contains the configuration Object with all the rules of the supermarket manager
+ * This file contains values that need to be reset when the program is restarted
  * @module reset
  */
 import { globalValues as glb } from "../global.mjs"; // import the global values
@@ -29,5 +29,3 @@ export const resetTable = () => {
   glb.arrowRight.disabled = false;
   glb.maxExpDate = new Date(JSON.parse(JSON.stringify(cnf.startWeek)));
 };
-
-
