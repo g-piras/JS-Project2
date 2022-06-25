@@ -72,6 +72,7 @@ Browser Compatibility:
 
 ## External resources
 
+[Jsdoc template](https://github.com/braintree/jsdoc-template)
 
 ---
 

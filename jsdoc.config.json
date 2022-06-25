@@ -16,7 +16,9 @@
     "opts": {
         "encoding": "utf8",               
         "destination": "./docs/",         
-        "recurse": true
+        "recurse": true,
+        "readme": "README.md",
+        "template": "./node_modules/jsdoc-template-main"
     }
 }
 

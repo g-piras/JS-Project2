@@ -3,7 +3,11 @@
  * @authors : Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
  * @project : Market
  *
+ */
+
+/**
  * This file contains the configuration Object with all the rules of the supermarket manager
+ * @module main
  */
 
 import { configurationObject as cnf } from "./config.mjs"; // configuration object
