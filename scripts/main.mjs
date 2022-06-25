@@ -1,22 +1,27 @@
+/**
+ * @file : main.js
+ * @authors : Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
+ * @project : Market
+ *
+ * This file contains the configuration Object with all the rules of the supermarket manager
+ */
 
 import { configurationObject as cnf } from "./config.mjs"; // configuration object
 import { globalValues as glb } from "./global.mjs"; // global object that will be used to store the global values
 import { resetTable } from "./reset/reset.mjs"; // reset Table when changing settings
 import * as fn from "./library.mjs"; // functions used in the program
 import * as vld from "./validation/form-validator.mjs"; // functions used in the program
-import * as fnflg from "./sorting/library_sorting.mjs"; // functions used for bonus 1 to choose the order
-import * as fnrm from "./itemRemove/removeItems.mjs" // function used for bonus 2
-/**
- * Function that delays the output of the program
- * It uses the functions setTimeout(), createNewItem(), changeStatus(),
- * print(), removeItem(), randomDate()
- */
+import * as fnflg from "./sorting/library_sorting.mjs"; // functions used in the program to sort the columns
+import * as fnrm from "./itemRemove/removeItems.mjs"; // function used to remove the items from the table
+
 const startProgram = () => {
   // RESET ITEMS
   resetTable();
-  //it sets the starting week of the program as a new date to which are summed a configurated number of days
+  /* it sets the starting week of the program as a new date
+   to which are summed a configurated number of days */
   cnf.startWeek.setDate(cnf.startWeek.getDate() + cnf.startingDate);
-  //it sets a maximum expiration date for the items as a new date to which are summed the amount of weeks during which the program runs plus an extra week
+  /* it sets a maximum expiration date for the items as a new date to which are summed
+   the amount of weeks during which the program runs plus an extra week */
   glb.maxExpDate.setDate(
     glb.maxExpDate.getDate() + (cnf.dayWeek * cnf.runWeeks + cnf.dayWeek)
   );
@@ -26,7 +31,8 @@ const startProgram = () => {
     fn.createTable(`products`, i);
     fn.createTable(`filtered-products`, i);
   }
-  // CREATES TITLES, PRINTS TABLES, CREATES ITEMS; CHANGES STATUS; REMOVES ITEMS, CREATES TWO ARRAY (FILTERED + NOT FILTERED) AND CHANGES WEEK DATE
+  /* CREATES TITLES > CREATES ITEMS FOR EACH WEEK > CHANGES STATUS > PRINTS ITEMS > DEEPCOPY ARRAY
+   REMOVES ITEMS > DEEPCOPY FILTERED ARRAY >  PRINTS AGAIN AND GOES TO NEXT WEEK */
   for (let i = 0; i < cnf.runWeeks; i++) {
     fn.createTitles(cnf.startWeek, cnf.language, i);
     fn.createNewWeek(
@@ -45,7 +51,7 @@ const startProgram = () => {
     cnf.startWeek.setDate(cnf.startWeek.getDate() + cnf.dayWeek);
   }
 
-  //BONUS 1
+  //BONUS 1 - SORTING
   // PARAMETERS FOR THE SORTING FUNCTION PRODUCTS TABLE
   let thTables = document.querySelectorAll("table tr th");
   thTables.forEach((element) => {
@@ -55,7 +61,7 @@ const startProgram = () => {
   });
   // END BONUS 1
 
-  // BONUS 2
+  // BONUS 2 - REMOVING ITEMS
   let trTable = document.querySelectorAll(".products tbody tr");
   let trFilteredTable = document.querySelectorAll(
     ".filtered-products tbody tr"
@@ -87,6 +93,7 @@ const startProgram = () => {
       fnrm.hideItem("filtered-products", idItem, index, cnf.runWeeks);
     });
   });
+  //END BONUS 2
 };
 
 //IIFE
@@ -96,13 +103,11 @@ const startProgram = () => {
   //when the submit button is clicked
   vld.submitButton.addEventListener("click", vld.validateForm);
   vld.submitButton.addEventListener("click", startProgram);
-
   //when the reset button is clicked
   vld.resetButton.addEventListener("click", vld.resetForm);
-
   //when the settings button is clicked
   vld.settingsButton.addEventListener("click", vld.togglePanel);
-  // BUTTONS
+
   // BUTTON MOVE PREVIOUS WEEK
   glb.arrowLeft.addEventListener("click", () => {
     glb.index--;
@@ -111,6 +116,7 @@ const startProgram = () => {
       glb.arrowLeft.setAttribute("disabled", "disabled");
     } else {
       if (glb.index === cnf.runWeeks - 2) {
+        console.log("hello");
         glb.arrowRight.removeAttribute("disabled");
       
       }

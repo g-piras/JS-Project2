@@ -6,10 +6,11 @@
  * This file contains all the functions used in the project
  */
 import { globalValues as glb } from "./global.mjs"; // global object that will be used to store the global values
+
 /*
  * Function that gets a random number within a given range
- * @param {number} min - the minimum number of the range
- * @param {number} max - the maximum number of the range
+ * @property {number} min - the minimum number of the range
+ * @property {number} max - the maximum number of the range
  * @returns {number} the random number
  */
 export const randomNumber = (min, max) => {
@@ -159,7 +160,6 @@ const chooseItem = () => {
  * Function that gets an unique ID (that will be assigned to every item), starting from a given global number (1)
  * @returns the unique ID
  */
-// funzione +1 ID ITEM
 const ID = () => {
   let uniqueId = glb.sumID;
   glb.sumID++;
@@ -168,8 +168,8 @@ const ID = () => {
 
 /**
  * Function that gets a random date, given a range of dates within which to choose
- * @param {date} start the minimum date allowed
- * @param {date} end the maximum date included
+ * @property {date} start the minimum date allowed
+ * @property {date} end the maximum date included
  * @returns {date} a random date between start and end (included)
  */
 const randomDate = (start, end) => {
@@ -177,6 +177,14 @@ const randomDate = (start, end) => {
   return date;
 };
 
+//START OF "NEW" FUNCTIONS FROM THE PREVIOUS PROJECT
+/**
+ * function that calls the function createNewItem() and places the item inside the global array of items
+ * @param {Date} startingDate - the programs current date 
+ * @param {Date} maxExpDate - the date allowed for the expiration date
+ * @param {Numbers} itemsNum - the number of items to be created
+ * @param {Number} index - the index of the item in the global array
+ */
 export const createNewWeek = (startingDate, maxExpDate, itemsNum, index) => {
   const week = [];
   for (let i = 0; i < itemsNum; i++) {
@@ -189,20 +197,29 @@ export const createNewWeek = (startingDate, maxExpDate, itemsNum, index) => {
   }
 };
 
+/**
+ * function that creates a new array of array (weeks) of items
+ * @param {Number} index - number of the week to deep copy and push 
+ */
 export const createCopyGlobalArray = (index) => {
-  const WeekClone = JSON.parse(JSON.stringify(glb.globalArrayItems[index]));
-  glb.globalArrayItemsCopy.push(WeekClone);
+  const weekClone = JSON.parse(JSON.stringify(glb.globalArrayItems[index]));
+  glb.globalArrayItemsCopy.push(weekClone);
 };
 
+/**
+ * function that creates a new array of array (weeks) of filtered items
+ * @param {Number} index - number of the week to deep copy and push 
+ */
 export const createCopyGlobalArrayFiltered = (index) => {
-  const WeekClone = JSON.parse(JSON.stringify(glb.globalArrayItems[index]));
-  glb.globalArrayItemsCopyFiltered.push(WeekClone);
+  const weekClone = JSON.parse(JSON.stringify(glb.globalArrayItems[index]));
+  glb.globalArrayItemsCopyFiltered.push(weekClone);
 };
+//END OF "NEW" FUNCTIONS
 
 /**
  * Function that creates the object item and places it inside the global array of items
  * It uses the functions ID() and chooseItem()
- * @param {date} startingDate the programs current date, used to generate a valid expiration date
+ * @property {date} startingDate the programs current date, used to generate a valid expiration date
  */
 const createNewItem = (startingDate, maxExpDate) => {
   let item = {
@@ -220,7 +237,7 @@ const createNewItem = (startingDate, maxExpDate) => {
 
 /**
  * Function that changes the status of every item in the global array
- * @param {object} startWeek - every week the program runs
+ * @property {object} startWeek - every week the program runs
  */
 export const changeStatus = (startWeek, itemLife, week) => {
   week.forEach((item) => {
@@ -252,7 +269,7 @@ export const removeItem = (week) => {
 
 /**
  * Function that checks a number
- * @param {number} num - the number to be checked
+ * @property {number} num - the number to be checked
  * @returns {string} " checks" if the number is not 1, " check " otherwise
  */
 export const check = (num) => {
@@ -267,13 +284,13 @@ export const check = (num) => {
 
 /**
  * Function that pads every date in the program
- * @param {object} d - the date to be padded, given a date format in the configuration object (bonus 3)
+ * @property {object} d - the date to be padded, given a date format in the configuration object (bonus 3)
  * @returns {object} the date padded
  */
 export const paddingDate = (d, lang) => {
   let days;
   if (lang === "IT") {
-    const mesi = [
+    const monthsIT = [
       "GEN",
       "FEB",
       "MAR",
@@ -290,11 +307,11 @@ export const paddingDate = (d, lang) => {
     days =
       ("0" + d.getDate()).slice(-2) +
       " " +
-      mesi[d.getMonth()] +
+      monthsIT[d.getMonth()] +
       " " +
       d.getFullYear();
   } else if (lang === "EN") {
-    const month = [
+    const monthsEN = [
       "JAN",
       "FEB",
       "MAR",
@@ -309,7 +326,7 @@ export const paddingDate = (d, lang) => {
       "DEC",
     ];
     days =
-      month[d.getMonth()] +
+      monthsEN[d.getMonth()] +
       " " +
       ("0" + d.getDate()).slice(-2) +
       " " +
@@ -318,8 +335,13 @@ export const paddingDate = (d, lang) => {
   return days;
 };
 
-// NEW FUNCTIONS
-/* PRINT TABLES  */
+//START OF "NEW" FUNCTIONS FROM THE PREVIOUS PROJECT
+/**
+ *  function that creates a number of table/titles based on the number of weeks set in the program
+ * @param {String} tableClass - the class of the table
+ * @param {Number} index - the index of the week out of the maximum number of weeks,
+ *                         used to have a unique id for each table
+ */
 export const createTable = (tableClass, index) => {
   let container = document.querySelector(".container-products");
   let title = document.createElement("h5");
@@ -346,7 +368,14 @@ export const createTable = (tableClass, index) => {
   }
 };
 
-/* PRINT CONTENT */
+/**
+ * function that prints the items in the table
+ * @param {String} tableClass - the class of the table 
+ * @param {String} lang - the language used to pad the date
+ * @param {Number} week - the week of the global array to be printed
+ * @param {Number} i - the inxed of the table we want to print the array on based on
+ *                 all the selected tables
+ */
 export const print = (tableClass, lang, week, i) => {
   let table = document.querySelectorAll(tableClass);
   let tBody = document.createElement("tbody");
@@ -367,7 +396,13 @@ export const print = (tableClass, lang, week, i) => {
     table[i].appendChild(tBody);
   });
 };
-/* FOR TITLES */
+
+/**
+ * function that prints either the week or "Products filtered" on the selected title
+ * @param {Date} dateWeek - date of the week to be printed on the title
+ * @param {*} lang - the language used to pad the date
+ * @param {*} index - the index of the title we want to print on
+ */
 export const createTitles = (dateWeek, lang, index) => {
   let title = document.querySelectorAll(".title-products");
   let filteredTitle = document.querySelectorAll(".title-filtered-products");
@@ -377,6 +412,11 @@ export const createTitles = (dateWeek, lang, index) => {
 };
 
 //BUTTON HANDLER
+/**
+ * function that hides all the tables and titles and shows the one of the 
+ * passed index
+ * @param {Number} index - the index of the table we want to show
+ */
 export const changeShowingWeek = (index) => {
   let allTitles = document.querySelectorAll(".title-products");
   let allTables = document.querySelectorAll(".products");
@@ -393,3 +433,4 @@ export const changeShowingWeek = (index) => {
   allTablesFiltered[index].classList.add("active");
   allTitlesFiltered[index].classList.add("active");
 };
+//END OF "NEW" FUNCTIONS FROM THE PREVIOUS PROJECT
