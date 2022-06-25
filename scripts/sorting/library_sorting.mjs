@@ -3,7 +3,11 @@
  * @authors : Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
  * @project : Market
  *
+ */
+
+/**
  * This file contains the function used to sort the items
+ * @module library_sorting
  */
 
 import * as flg from "./flags.mjs"; //object that will be used to store the boolean values of the sort

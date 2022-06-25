@@ -3,7 +3,11 @@
  * @authors : Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
  * @project : Market
  *
+ */
+
+/**
  * This file contains the configuration Object with all the rules of the supermarket manager
+ * @module reset
  */
 import { globalValues as glb } from "../global.mjs"; // import the global values
 import { configurationObject as cnf } from "../config.mjs"; // configuration object

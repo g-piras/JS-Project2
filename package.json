@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "generate-docs": "node_modules/.bin/jsdoc --configure jsdoc.config.json --verbose",
+    "jsdoc": "jsdoc -c jsdoc.config.json"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.6.10"
+  }
+}

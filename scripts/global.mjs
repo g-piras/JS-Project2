@@ -2,8 +2,12 @@
  * @file : global.js
  * @authors : Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
  * @project : Market
- * 
+ *
+ */
+
+/**
  * This file contains gobal values used in the program
+ * @module global
  */
 
 /**

@@ -3,14 +3,18 @@
  * @authors : Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
  * @project : Market
  *
+ */
+
+/**
  * This file contains the configuration Object with all the rules of the supermarket manager
+ * @module removeItems
  */
 
 /**
  * function that changes the status of the item to removed or the previous one
  * @param {String} className - the class of the table
  * @param {Node} element - the item clicked
- * @param {String} placeholder - the placeholder of the previous state 
+ * @param {String} placeholder - the placeholder of the previous state
  * @returns placeholder
  */
 export const printRemove = (className, element, placeholder) => {

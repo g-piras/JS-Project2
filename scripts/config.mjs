@@ -3,9 +3,12 @@
  * @authors : Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
  * @project : Market
  *
- * This file contains the configuration Object with all the rules of the supermarket manager
  */
 
+/**
+ * This file contains the configuration Object with all the rules of the supermarket manager
+ * @module config
+ */
 /**
  * @property {string} language - the language used to chose how to print the months
  * @property {number} itemLifeSpan - the number of weeks the item will be in the supermarket
@@ -22,5 +25,5 @@ export const configurationObject = {
   dayWeek: 7,
   newItems: 5,
   startingDate: 10,
-  startWeek: new Date()
+  startWeek: new Date(),
 };

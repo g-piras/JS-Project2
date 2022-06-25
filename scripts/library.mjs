@@ -3,11 +3,15 @@
  * @authors : Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
  * @project : Market
  *
- * This file contains all the functions used in the project
+ */
+
+/**
+ * This file contains all the main functions used in the project
+ * @module library
  */
 import { globalValues as glb } from "./global.mjs"; // global object that will be used to store the global values
 
-/*
+/** 
  * Function that gets a random number within a given range
  * @property {number} min - the minimum number of the range
  * @property {number} max - the maximum number of the range
@@ -158,7 +162,7 @@ const chooseItem = () => {
 
 /**
  * Function that gets an unique ID (that will be assigned to every item), starting from a given global number (1)
- * @returns the unique ID
+ * @returns {Number} uniqueID - the unique ID
  */
 const ID = () => {
   let uniqueId = glb.sumID;
@@ -168,8 +172,8 @@ const ID = () => {
 
 /**
  * Function that gets a random date, given a range of dates within which to choose
- * @property {date} start the minimum date allowed
- * @property {date} end the maximum date included
+ * @param {date} start the minimum date allowed
+ * @param {date} end the maximum date included
  * @returns {date} a random date between start and end (included)
  */
 const randomDate = (start, end) => {
@@ -256,6 +260,7 @@ export const changeStatus = (startWeek, itemLife, week) => {
 
 /**
  * Function that remove an item from the global array, if its status is "old" or "expired"
+ * @property {object} week - every week the program runs
  */
 export const removeItem = (week) => {
   for (let i = 0; i < week.length; i++) {
