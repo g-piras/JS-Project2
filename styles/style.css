@@ -1,0 +1,285 @@
+/**
+ * @file: style.css
+ * @authors: Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
+ * @project: Market
+ * 
+ * This file contains the CSS applied to the index.html page
+ */
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-image: url("../images/Predawn.jpg");
+    background-size: cover;
+    color: #322823;
+}
+
+
+/**
+ * Style for the header
+ */
+li img[alt="market icon"] {
+    width: 60px;
+}
+
+#settings-button img {
+    width: 30px;
+    transition: transform 1s;
+}
+
+#settings-button:hover {
+    cursor: pointer;
+}
+
+#settings-button:hover img {
+    transform: rotate(180deg);
+}
+
+li:last-of-type {
+    padding-right: 10px;
+}
+
+li:first-of-type {
+    padding-left: 10px;
+}
+
+nav ul {
+    background-color: #d8b494;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+
+
+/**
+ * Style for the settings panel
+ */
+#settings-button,
+img {
+    display: flex;
+}
+
+.box-input {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 200px;
+}
+
+label {
+    margin-top: 10px;
+}
+
+label,
+select {
+    margin-bottom: 10px;
+}
+
+#submit-button,
+#reset-button {
+    position: absolute;
+    bottom: -35px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: fit-content;
+    align-self: flex-end;
+}
+
+#reset-button {
+    left: 0;
+}
+
+#settings-panel {
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    background-color: bisque;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 250px;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    z-index: 1;
+}
+
+#settings-panel.hidden {
+    display: none;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+
+/**
+ * Style for the section with the tables
+ */
+section {
+    position: relative;
+    background-color: white;
+    width: 65%;
+    height: 500px;
+    margin: 5% auto;
+    padding-top: 1px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+section button {
+    position: absolute;
+    top: 45%;
+}
+
+.previous-week,
+.next-week {
+    width: 65px;
+    height: 65px;
+}
+
+.previous-week,
+.next-week {
+    position: absolute;
+    border-radius: 50%;
+    font-size: 40px;
+}
+
+.previous-week {
+    left: -90px;
+    z-index: 1;
+    transition: all 0.2s ease-in-out;
+}
+
+.next-week {
+    right: -90px;
+    transition: all 0.2s ease-in-out;
+}
+
+.week-items,
+.filtered-items {
+    margin: 10px 10px 5px 10px;
+    border-radius: 10px;
+}
+
+
+
+/**
+ * Style for the titles of tables
+ */
+h5 {
+    padding-top: 8px;
+    position: relative;
+    text-align: center;
+    font-size: 20px;
+    display: none;
+}
+
+.title-filtered-products,
+.title-products {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: center;
+    width: 100%;
+    color: white;
+    background-color: #237297;
+    height: 2em;
+}
+
+h5.title-filtered-products {
+    margin-top: 10px;
+}
+
+h5.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/**
+ * Style for the tables with the items
+ */
+table {
+    width: 100%;
+    display: none;
+}
+
+thead,
+tbody,
+tr,
+th,
+td {
+    display: block;
+}
+
+thead {
+    border-bottom: 2px solid rgba(218, 218, 218, 0.671);
+    background-color: white;
+    font-weight: bold;
+}
+
+thead tr {
+    width: calc(100% - 16px);
+}
+
+thead th,
+tbody tr td {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    width: 19%;
+    float: left;
+    text-align: center;
+}
+
+tbody {
+    height: 160px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+tbody tr td {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+tr:after {
+    content: ' ';
+    display: block;
+    clear: both;
+}
+
+tbody tr {
+    border-bottom: 2px solid rgba(218, 218, 218, 0.671);
+}
+
+tbody tr:nth-of-type(odd) {
+    background-color: rgb(245, 232, 207);
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: rgb(245, 236, 236);
+}
+
+
+/**
+ * Style for the status classes
+ */
+.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.removed {
+    color: red;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--Beginning of the header-->
+    <meta charset="utf-8" />
+    <title>Market Project</title>
+    <meta name="description" content="Market project" />
+    <meta name="authors" content="Lombardo, Parisi, Piras, Trabbia" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/reset.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/x-icon" href="./images/market.png" />
+
+    <!--End of the header-->
+</head>
+
+<body>
+    <!--Beginning of the body-->
+
+    <!-- Navigation bar -->
+    <header>
+        <nav>
+            <ul>
+                <li><img src="./images/market.png" alt="market icon" /></li>
+                <li>
+                    <h1>MARKET PROJECT - A weekly product dashboard</h1>
+                </li>
+                <li>
+                    <button id="settings-button">
+                        <img src="./images/settings-icon.svg" alt="settings icon" />
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Settings panel -->
+    <div class="hidden" id="settings-panel">
+        <div class="box-input">
+            <label for="start-date">Start date:</label>
+            <input type="date" id="start-date" name="start-date" required />
+            <div class="error-message" id="startDateErr"></div>
+            <label for="days-to-wait">Days to wait:</label>
+            <input type="number" id="days-to-wait" name="days-to-wait" required />
+            <span class="error-message" id="daysToWaitErr"></span>
+        </div>
+
+        <div class="box-input">
+            <label for="weeks">Weeks:</label>
+            <input type="number" id="weeks" name="weeks" min="1" required />
+            <div class="error-message" id="weeksErr"></div>
+            <label for="items-per-week">Items per week:</label>
+            <input type="number" id="items-per-week" name="items-per-week" min="1" required />
+            <div class="error-message" id="itemsPerWeekErr"></div>
+        </div>
+
+        <div class="box-input">
+            <label for="item-week-life">Item week life:</label>
+            <input type="number" id="item-week-life" name="item-week-life" min="1" required />
+            <div class="error-message" id="itemWeekLifeErr"></div>
+            <label for="language">Language</label>
+            <select name="language" id="language">
+                <option value="EN">English</option>
+                <option value="IT">Italian</option>
+            </select>
+
+            <!-- button to reset all inputs -->
+            <input type="reset" value="Reset" id="reset-button" />
+            <!--button to save settings-->
+            <input type="submit" value="Save settings" id="submit-button" />
+        </div>
+    </div>
+
+    <main>
+        <section>
+
+            <!-- button for previous week -->
+            <button class="previous-week" title="previous week" disabled>&#8678;</button>
+
+            <!-- container in which add from JS the products tables -->
+            <div class="week-items">
+                <div class="container-products">
+
+                </div>
+            </div>
+
+            <!-- button for next week -->
+            <button class="next-week" title="next week">&#8680;</button>
+
+        </section>
+    </main>
+
+    <!--End of the body-->
+    <!--Js files called-->
+    <script type="module" src="./scripts/main.mjs"></script>
+</body>
+
+</html>
