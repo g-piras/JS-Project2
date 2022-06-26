@@ -1,75 +1,84 @@
-# MARKET PROJECT 02
-
-## PROJECT DESCRIPTION AND INTRODUCTION    
-
-This program outputs a list of supermarket goods filtered by expiry date. Every item has these properties:
-- a unique ID
-- a name
-- an expiration date
-
-There is a supermarket manager that configures some rules:
-- expired items should be removed
-- items that have been on the shelf for more than N weeks should be removed 
-- each week M new products arrive
-- the program should start from the current date plus K days and run for X weeks
-- each weekly list should be printed after a duration or R seconds
-- N, M, K, X, R are configurated by the supermarket manager
+# project-02-group-01
+This project is a dynamic web page that has the purpose of displaying a navigable weekly list of supermarket products with their ID, name, status, expiration date and checks.
 
 ---
 
-## USAGE   
+- [project-02 - group 01](#project-02---group-01)
+  - [Usage](#usage)
+  - [Configuration and technical characteristics](#configuration-and-technical-characteristics)
+  - [Files and project structure](#files-and-project-structure)
+  - [Features delivered](#features-delivered)
+  - [General features](#general-features)
+  - [Bonuses delivered](#bonuses-delivered)
+    - [Bonus 1](#bonus-1)
+    - [Bonus 2](#bonus-2)
+  - [Browser compatibility](#browser-compatibility)
+  - [External resources](#external-resources)
+  - [License and contact information](#license-and-contact-information)
+  - [Authors](#authors)
+  - [Changelog and version history](#changelog-and-version-history)
 
-All the javascript files are called in the index.html file. To see the results, you should open the console from the index.html's page inspector and click on the button "Run the Code" in the index.html page.
+---
+
+## Usage  
+
+This project works with modules, so is necessary to run the `index.html` file with the live server.  
+When the program starts, the page will show a container with two tables: one with all the weekly products, and the other only with the products that are not old, removed, or expired.  
+The program uses some default configuration values (start date, days to wait, weeks, items per week, item week life and language) but these can be changed in the settings panel by the user, clicking on the button in the top right corner of the page. The save button is to click only when all the data is inserted correctly, otherwise the panel will show error messages and the program will restart. The reset button is to reset all the input data inserted and to clear all the error messages.  
+On the sides of the container there are two arrows that are used to change the week.
 
 ---
 
-## CONFIGURATION AND TECHNICAL CHARACTERISTICS   
+## Configuration and technical characteristics
+The configuration values that can be modified by the user are:
+ - Start date: the date from which the program will start.
+ - days to wait: the number of days to add to the starting date before which the program will start.
+ - weeks: the number of weeks that the program will show;
+ - items per week: the number of items that will be added every week;
+ - item week life: the number of weeks after which the product becomes old;
+ - language: the language used to display the dates (only italian and english are available).
 
-In the folder /**scripts** there are four javascript files:
-- **config.mjs**:
-- **library.mjs**: containing all the functions used in the program
-- **main.mjs**: containing the SetInterval function that delays the console log output
+Attention! The values inserted by the user in the settings panel are saved only if all the data is inserted and correctly. If the "save settings" button is clicked, the program will restart.
+
+---
+
+## Files and project structure
+```
+📦JS-Project2
+ ┣ 📂docs - JSDOC files
+ ┣ 📂images - images used in the index.html file
+ ┃ ┣ 📜arance.jpeg
+ ┃ ┣ 📜market.png
+ ┃ ┣ 📜Predawn.jpg
+ ┃ ┗ 📜settings-icon.svg
+ ┣ 📂scripts - all JavaScript files
+ ┃ ┣ 📂itemRemove - bonus 2
+ ┃ ┃ ┗ 📜removeItems.mjs
+ ┃ ┣ 📂reset - reset of the program
+ ┃ ┃ ┗ 📜reset.mjs
+ ┃ ┣ 📂sorting - bonus 1
+ ┃ ┃ ┣ 📜flags.mjs
+ ┃ ┃ ┗ 📜library_sorting.mjs
+ ┃ ┣ 📂validation - validation of settings panel
+ ┃ ┃ ┗ 📜form-validator.mjs
+ ┃ ┣ 📜config.mjs - file with the configuration values
+ ┃ ┣ 📜global.mjs - file with the global variables
+ ┃ ┣ 📜library.mjs - file with the functions used in the program
+ ┃ ┗ 📜main.mjs - file with the main program
+ ┣ 📂styles
+ ┃ ┣ 📜reset.css
+ ┃ ┗ 📜style.css - style for index.html file
+ ┣ 📜index.html - main file of the program
+ ┣ 📜jsdoc.config.json - configuration file for JSDOC
+ ┣ 📜LICENSE.txt - license information
+ ┣ 📜package-lock.json - file with the dependencies of the JSDOC
+ ┣ 📜package.json - file with the information of the JSDOC
+ ┗ 📜README.md - file with the information of the project
+```
 
 ---
 
-## FOLDER STRUCTURE     
-
-> Folder /**project-01-group-03**     
->   * LICENSE.txt
->   * README.md
->   * index.html
->>  ./**images**
->>   - arance.jpeg
->
->>./**scripts**
->>- Readme.md
->>- config.mjs
->>- library.mjs
->>- main.mjs
->
->>./**styles**
->>- reset.css
->>- style.css
->---
-
-
-Every js file has a header documentation that explain its aim. The folder **/JSDoc**  cointains a JSDoc documentation of the entire project. The folder **/images** contains the image called in the index.html file. The style.css file is a stylesheet for the index, and the file LICENSE.txt contains a license for the project.
-
----
-## BONUSES DELIVERED     
-
->### **Bonus 1: Sort each column of the list when the user clicks on the column title:**
->Lorem Ipsum docet ipsum  dicet damnatio memorae cogito ergo sum
----
->### **Bonus 2: items can have an additional state 'removed' which means that the item has been manually removed by the supermarket manager:**
-    >>- **clicking on the status of an item changes it to 'removed':** Lorem Ipsum docet ipsum  dicet damnatio memorae cogito ergo sum
-    >
-    >>- **clicking again changes it back to the original status:** Lorem Ipsum docet ipsum  dicet damnatio memorae cogito ergo sum
-    >
-    >>- **clicking again changes it back to the original status:** Lorem Ipsum docet ipsum  dicet damnatio memorae cogito ergo sum
->___
-
-## FEATURES DELIVERED
+## Features delivered
 
 Below are described all the feature delivered.
 
@@ -274,37 +283,53 @@ In **/project-01-group-04/scripts/main.js**:
 
 ---
 
+## Bonuses delivered
+Bonus 1 and Bonus 2, described below.  
+Attention!  
+All two bonuses cannot be used at the same time. If the user removes a product clicking on it, if he also wants to sort the columns, the product will return with the previous status.
 
-## BROWSER COMPATIBILITY
+### Bonus 1
+Sort each column of the list when the user clicks on the column title:
 
-The index.html file has been validated on [The W3C Markup Validation Service](https://validator.w3.org/). 
+---
+
+### Bonus 2
+Items can have an additional state "removed" which means that the item has been manually removed by the supermarket manager
+
+---
+
+## Browser compatibility
+
+The index.html file has been validated on [The W3C Markup Validation Service](https://validator.w3.org/).  
 The style.css file has benn validated on [The W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/).     
 
 Browser Compatibility:
 - Chrome V102.0.5005.115 (64bit): tested and working.
-- Firefox V101.0.1 (64 bit): tested and working.
-- Edge V102.0.1245.44 (64 bit): tested and working.
-- Opera V88.0.4412.40: ...
+- Firefox V
+- Edge V
+- Opera V
+- Brave V
 
 ---
 
-## EXTERNAL RESOURCES      
+## External resources     
 
 - [Choose a license](https://choosealicense.com/)
+- [Google font](https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap)
 
 ---
->## CONTACT INFORMATION
+>## Contect information
 >- marco.parisi@edu.itspiemonte.it
 >- lorenzo.trabbia@edu.itspiemonte.it
 >- giampietro.piras@edu.itspiemonte.it
 >- lorenzo.lombardo2@edu.itspiemonte.it
 >---
 ___
-## LICENSE  
+## License 
 
 License: there is a file LICENSE.txt that contains an open source license. The template is taken from an online generator, for more info check the link in the external resources section. 
 
-## AUTHORS     
+## Authors     
 
 - Marco Parisi 
 - Lorenzo Trabbia 
@@ -313,6 +338,5 @@ License: there is a file LICENSE.txt that contains an open source license. The t
 
 ---
 
-## CHANGELOG AND VERSION HISTORY     
-...
---- 
+## Changelog and version history  
+For this project we used a mix of git version control and cloud backups via Google Drive. The git history is embedded in the project folder and be verified (note that some people may have less commits than others, this is due to the mixed usage of the two different tools, and is something that should be improved for future projects).
