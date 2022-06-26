@@ -4,20 +4,21 @@ This project is a dynamic web page that has the purpose of displaying a navigabl
 
 ---
 ## **Index**
-- [project-02 - group 01](#project-02---group-01)
-  - [Usage](#usage)
-  - [Configuration and technical characteristics](#configuration-and-technical-characteristics)
-  - [Files and project structure](#files-and-project-structure)
-  - [Features delivered](#features-delivered)
-  - [General features](#general-features)
-  - [Bonuses delivered](#bonuses-delivered)
-    - [Bonus 1](#bonus-1)
-    - [Bonus 2](#bonus-2)
-  - [Browser compatibility](#browser-compatibility)
-  - [External resources](#external-resources)
-  - [License and contact information](#license-and-contact-information)
-  - [Authors](#authors)
-  - [Changelog and version history](#changelog-and-version-history)
+- [**A MARKET PROJECT**](#a-market-project)
+  - [**project-02-group-01**](#project-02-group-01)
+  - [**Index**](#index)
+  - [**Usage**](#usage)
+  - [**Configuration and technical characteristics**](#configuration-and-technical-characteristics)
+  - [**Files and project structure**](#files-and-project-structure)
+  - [**Features delivered**](#features-delivered)
+  - [**Bonuses delivered**](#bonuses-delivered)
+    - [**Bonus 1**](#bonus-1)
+    - [**Bonus 2**](#bonus-2)
+  - [**Browser compatibility**](#browser-compatibility)
+  - [**External resources**](#external-resources)
+  - [**License**](#license)
+  - [**Authors**](#authors)
+  - [**Changelog and version history**](#changelog-and-version-history)
 
 ---
 
@@ -289,4 +290,4 @@ License: there is a file [LICENSE.txt](LICENSE.txt) that contains an open source
 ---
 
 ## **Changelog and version history**  
-For this project we used a mix of git version control and cloud backups via Google Drive. The git history is embedded in the project folder and be verified (note that some people may have less commits than others, this is due to the mixed usage of the two different tools, and is something that should be improved for future projects).
+For this project we used a mix of git version control and cloud backups via Google Drive. The git history is embedded in the project folder and be verified (note that some people may have less commits than others, this is due to the mixed usage of the two different tools, and is something that should be improved for future projects). 
