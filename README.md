@@ -1,8 +1,9 @@
-# project-02-group-01
+# **A MARKET PROJECT**
+## **project-02-group-01**
 This project is a dynamic web page that has the purpose of displaying a navigable weekly list of supermarket products with their ID, name, status, expiration date and checks.
 
 ---
-
+## **Index**
 - [project-02 - group 01](#project-02---group-01)
   - [Usage](#usage)
   - [Configuration and technical characteristics](#configuration-and-technical-characteristics)
@@ -20,7 +21,7 @@ This project is a dynamic web page that has the purpose of displaying a navigabl
 
 ---
 
-## Usage  
+## **Usage**  
 
 This project works with modules, so is necessary to run the `index.html` file with the live server.  
 When the program starts, the page will show a container with two tables: one with all the weekly products, and the other only with the products that are not old, removed, or expired.  
@@ -29,7 +30,7 @@ On the sides of the container there are two arrows that are used to change the w
 
 ---
 
-## Configuration and technical characteristics
+## **Configuration and technical characteristics**
 The configuration values that can be modified by the user are:
  - Start date: the date from which the program will start.
  - days to wait: the number of days to add to the starting date before which the program will start.
@@ -42,7 +43,7 @@ Attention! The values inserted by the user in the settings panel are saved only 
 
 ---
 
-## Files and project structure
+## **Files and project structure**
 ```
 📦JS-Project2
  ┣ 📂docs - JSDOC files
@@ -78,11 +79,11 @@ Attention! The values inserted by the user in the settings panel are saved only 
 
 ---
 
-## Features delivered
+## **Features delivered**
 
 Below are described all the feature delivered.
 
-In **/project-01-group-04/scripts/manager.js**:      
+In **/project-02-group-01/scripts/library.mjs**:      
   - Feature 1: **creation of the configuration object**   
       ~~~
       const configurationObject = {};
@@ -118,32 +119,19 @@ In **/project-01-group-04/scripts/manager.js**:
           It represents the number of days that we added to the current date to have a starting date of the program.
         
         ---
-      - ~~~
-        minUpdateListSeconds and maxUpdateListSeconds  
-        ~~~      
-          As required the console log output is printed with a random delay. This delay is randomized between a range of seconds. **`minUpdateListSeconds`** represents the minimum of seconds to consider, and **`maxUpdateListSeconds`** represents the maximum.
-        
-        ---
-      - ~~~
-        paddingCharacter
-        ~~~      
-          It is the padding character used to pad the console log output.
 
-        ---
-        ---
-
-In **/project-01-group-04/scripts/library.js** all the features are arrow functions:
+In **/project-02-group-01/scripts/library.js** all the features are arrow functions:
 
   - Feature 1: 
     ~~~
-    let randomNumber = (min, max) => {}
+    const randomNumber = (min, max) => {}
     ~~~
     This function generates a random number within a given range. It has two parameters, a minimum number and a maximum number that delimitate the range of possible numbers. It has two parameters: `min`, which represents the minimum integer number allowed, and `max`, which represents the maximum integer number allowed. It utilizes the MATH functions `Math.ceil()` that rounds up a number to its nearest integer, `Math.floor()` that rounds down a number to its nearest integer, and `Math.random()`that returns a random number.
 
     ---
   - Feature 2:
     ~~~
-    let chooseItem = () => {}
+    const chooseItem = () => {}
     ~~~
     This function gets a random item from an array of possible choices:
      - We have created an array of strings (the items). 
@@ -153,21 +141,21 @@ In **/project-01-group-04/scripts/library.js** all the features are arrow functi
     ---
   - Feature 3:
     ~~~
-    let ID = () => {}
+    const ID = () => {}
     ~~~
     This function generates an unique ID that will be assigned in every item, starting from a given global number (sumID = 1). In the function we have declared a new variable, `uniqueId`, and assigned to it the value of `sumID`. Then the function increases the value of `sumID`, and returns the value of `uniqueId`. 
 
     ---
   - Feature 4: 
     ~~~
-    let randomDate = (start, end) => {}
+    const randomDate = (start, end) => {}
     ~~~
       This function has two parameters, `start`, a date object that represents the minimum date allowed (inclusive), and `end`, an other date object that represents the maximum date allowed (inclusive). Within the function a new local variable is created called `date`. This variable has a new date object assigned to it which is randomly generated through the use of `start`, `end` and the MATH function `Math.random()` that returns a random number.
 
     ---
   - Feature 5:
     ~~~
-    let createNewItem = (startingDate) => {}
+    const createNewItem = (startingDate) => {}
     ~~~
       This function has one parameter, `startingDate`, a date object that represents every week that passes in the program. In the function a new variable is declared: `item`, an object with these properties:
       - id -> its value, a number, is the returned value from the function `ID()`
@@ -180,7 +168,7 @@ In **/project-01-group-04/scripts/library.js** all the features are arrow functi
     ---
   - Feature 6:
     ~~~
-    let changeStatus = (startWeek) => {}
+    const changeStatus = (startWeek) => {}
     ~~~
       This function is used to change the status of every item in the global array. The possible status are
       - "new", the item has arrived this week
@@ -193,35 +181,16 @@ In **/project-01-group-04/scripts/library.js** all the features are arrow functi
     ---
   - Feature 7:
     ~~~
-    let removeItem = () => {{}
+    const removeItem = () => {}
     ~~~
       This function removes an item from the global array, if its status is "old" or "expired". Inside the function there is a for loop used to iterate through the global array. Inside there is an if statement: if the property *status* of every item object is equal to the string "old" or "expired", the function removes it with the *splice* method. Then it sets the value of the variable *i* (used for the statements of the for loop) to -1 to start again from the index 0 of the array.
 
-    ---
-  - Feature 8:
-    ~~~
-    let paddingString = (word, paddingLength, character) => {}
-    ~~~
-      This function's aim is the padding of every string that will be printed in the console log output (thus the items' name and status). It has three parameters: 
-      - *word*, a string that will be padded
-      - *paddingLength*, the final length of the string after the padding
-      - *character*, the character choosen to pad. It is configurated by the manager. 
-      In the function we have declared a new variable, *difference*, ad we have assigned to it the result value of the difference between the final *paddingLenght* and the initial word length. The we have calculated the *sidePadding* by dividing *difference* per 2. This value represents how many character we have to add to each side of the word to padding it. The last new variable is *remainder*, the remainder of the division. If it is 0, the function uses the method *padEnd()* to add the character (using the value of *sidePadding*) choosen at the end of the word. Otherwise, the function does the same procedure but at the end it add +1 to have the same output of the words with an even length.        
-      In every case, it uses the method *padStart()* to add the defined number of characters at the beginning of the word.      
-      At the end the function returns the string padded, replacing all the spaces inside it (if any) with the choosen character. 
 
     ---
-  - Feature 9:
-    ~~~
-    let paddingID = (identificator) => {}
-    ~~~
-      This function pads the unique ID of every item. It has one parameter, *identificator*, a number, that represents the unique ID. In the function we have declared a new variable, *padID*, that is the result of the following concatenation: `"00" + identificator`. So now every id has the same length.      
-      At the end the function returns *padID* as a string, after applying the method *slice()* to return only the section starting at index -1 until index -3 (in this way padded two-digits number have the same length of one-digit numbers).
 
-    ---
   - Feature 10:
     ~~~
-    let paddingDate = (d) => {}
+    const paddingDate = (d) => {}
     ~~~
       This function pads every date in the program, given a date format in the configuration object. The function has one parameter, the date object to be padded. Inside there is an if statement: if the property "language" of the configuration object is equal to the string "IT", the function declares a new variable, an array of strings, containing the months in Italian. Then it sets a new variable, *days*, as the result of a concatenation: the day of the month of the passed date (sliced to get only the last two digits and concatenated with a string "0" before the number) plus the name of the month (taken from the array), plus the year of the specificied date. 
       Otherwise, if the property "language" of the configuration object is equal to the string "EN", the function does the same procedure but using an array of the months in English. At the end the function replaces all the empty spaces (if any) with the padding character configurated in the manager object, and it returns the string. 
@@ -229,7 +198,7 @@ In **/project-01-group-04/scripts/library.js** all the features are arrow functi
     ---
   - Feature 11:
     ~~~
-    let check = (num) => {}
+    const check = (num) => {}
     ~~~
       This function checks a number, its parameter. It will be used in the console log output to print the checks of every item as required. In the function: 
       - we have declared a new variable, *control*
@@ -252,84 +221,62 @@ In **/project-01-group-04/scripts/library.js** all the features are arrow functi
     - the status, padded using the function *paddingString*
     - the check of every item, using the function *check* to change the output based on the number of checks
   
-    ---
-    ---
 
-In **/project-01-group-04/scripts/variables.js** there are no features delivered, but only the declaration of all the used variables that are not configurated by the manager.        
 
-  ---
-  ---
-
-In **/project-01-group-04/scripts/main.js**:
-  - Feature 1: **scheduling of the function print to delay the console log output**     
-    ~~~
-    let mySetInterval = () => {} 
-    ~~~
-    In the function *mySetInterval()* we have written a for loop that iterates through the number of weeks the program runs. Inside the for loop we have used *setTimeout()* to schedule for one time an anonymous function. In this function there are:
-    - a for loop to iterate through all the new items created every week and to generate new items every week, using the *createNewItem()* function with as parameter *startWeek* (the first time of the loop it's the current date plus a number of days configurated by the manager). 
-    - a series of console log to format the output (an empty space and then a series of "-" characters) and a console log of the actual week of the program -> *startWeek*, padded with the function *paddingDate()*
-    - then there is the call to the function *changeStatus()* to change the property status in that week (always *startWeek*)
-    - the call to the function *print()*
-    - the call to the function *removeItem()*
-    - a series of console log to format the output (an empty space, then the string "Filtered", to indicate the expired and old items that will be listed below the string, and a series of "-" characters)
-    - again the call to the function *print()*
-    - the edit of *startWeek*, adding to it 7 days (the variable *dayWeeK*) to go on with the program every week
-
-    This anonymous function is scheduled to start after a random number of seconds, between a range of milliseconds set in the configuration object, calculated using the function *randomNumber()*.     
-
-    At the end the function *mySetInterval* is called.
 
     ---
 
 ---
 
-## Bonuses delivered
+## **Bonuses delivered**
 Bonus 1 and Bonus 2, described below.  
 Attention!  
 All two bonuses cannot be used at the same time. If the user removes a product clicking on it, if he also wants to sort the columns, the product will return with the previous status.
 
-### Bonus 1
-Sort each column of the list when the user clicks on the column title:
+### **Bonus 1**
+Sort each column of the list when the user clicks on the column title ✔
 
 ---
 
-### Bonus 2
-Items can have an additional state "removed" which means that the item has been manually removed by the supermarket manager
+### **Bonus 2**
+Items can have an additional state "removed" which means that the item has been manually removed by the supermarket manager ✔
 
 ---
 
-## Browser compatibility
 
-The index.html file has been validated on [The W3C Markup Validation Service](https://validator.w3.org/).  
+## **Browser compatibility**
+
+The index.html file has been validated on [The W3C Markup Validation Service](https://validator.w3.org/). 
 The style.css file has benn validated on [The W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/).     
 
 Browser Compatibility:
 - Chrome V102.0.5005.115 (64bit): tested and working.
-- Firefox V
-- Edge V
-- Opera V
-- Brave V
+- Firefox V101.0.1 (64 bit): tested and working.
+- Edge V103.0.1264.37 (64 bit): tested and working.
+- Opera V88.0.4412.40: tested and working.
+- Brave V1.40.107 (64bit): tested and working.
 
 ---
 
-## External resources     
+## **External resources**     
 
 - [Choose a license](https://choosealicense.com/)
 - [Google font](https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap)
+- [Jsdoc Template](https://github.com/braintree/jsdoc-template)
 
 ---
->## Contect information
+>## **Contact information**
 >- marco.parisi@edu.itspiemonte.it
 >- lorenzo.trabbia@edu.itspiemonte.it
 >- giampietro.piras@edu.itspiemonte.it
 >- lorenzo.lombardo2@edu.itspiemonte.it
 >---
 ___
-## License 
+## **License** 
 
-License: there is a file LICENSE.txt that contains an open source license. The template is taken from an online generator, for more info check the link in the external resources section. 
+License: there is a file [LICENSE.txt](LICENSE.txt) that contains an open source license. The template is taken from an online generator, for more info check the link in the external resources section. 
 
-## Authors     
+## **Authors**     
 
 - Marco Parisi 
 - Lorenzo Trabbia 
@@ -338,5 +285,5 @@ License: there is a file LICENSE.txt that contains an open source license. The t
 
 ---
 
-## Changelog and version history  
+## **Changelog and version history**  
 For this project we used a mix of git version control and cloud backups via Google Drive. The git history is embedded in the project folder and be verified (note that some people may have less commits than others, this is due to the mixed usage of the two different tools, and is something that should be improved for future projects).
