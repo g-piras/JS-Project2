@@ -3,7 +3,11 @@
  * @authors : Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
  * @project : Market
  *
+ */
+
+/**
  * This file contains the configuration Object with all the rules of the supermarket manager
+ * @module main
  */
 
 import { configurationObject as cnf } from "./config.mjs"; // configuration object
@@ -111,14 +115,12 @@ const startProgram = () => {
   // BUTTON MOVE PREVIOUS WEEK
   glb.arrowLeft.addEventListener("click", () => {
     glb.index--;
-    
     if (glb.index === 0) {
       glb.arrowLeft.setAttribute("disabled", "disabled");
     } else {
       if (glb.index === cnf.runWeeks - 2) {
         console.log("hello");
         glb.arrowRight.removeAttribute("disabled");
-      
       }
     }
     fn.changeShowingWeek(glb.index);
@@ -128,15 +130,11 @@ const startProgram = () => {
     glb.index++;
     if (glb.index === cnf.runWeeks - 1) {
       glb.arrowRight.setAttribute("disabled", "disabled");
-      // console.log(glb.index);
-      
     } else {
       if (glb.index === 1) {
         glb.arrowLeft.removeAttribute("disabled");
       }
     }
-    
-
     fn.changeShowingWeek(glb.index);
   });
 })();

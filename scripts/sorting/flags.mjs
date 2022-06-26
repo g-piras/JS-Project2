@@ -3,9 +3,12 @@
  * @authors : Lorenzo Lombardo, Marco Parisi, Giampietro Piras, Lorenzo Trabbia
  * @project : Market
  *
- * This file contains all the flags used in the program to sort the items
  */
 
+/**
+ * This file contains all the flags used in the program to sort the items
+ * @module flags
+ */
 /**
  * OBJECT FOR ASCENDING DESCENDING ITEMS ORDER TABLE
  * @property {boolean} id - value used to sort by id (ascending or descending)
