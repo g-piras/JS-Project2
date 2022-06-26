@@ -83,42 +83,6 @@ Attention! The values inserted by the user in the settings panel are saved only 
 
 Below are described all the feature delivered.
 
-In **/project-02-group-01/scripts/library.mjs**:      
-  - Feature 1: **creation of the configuration object**   
-      ~~~
-      const configurationObject = {};
-      ~~~  
-    We have created an object to store all the manager settings as required. The properties inside the object are:     
-      - ~~~
-        language
-        ~~~          
-          It sets the language format for every date in the project (required by bonus 3).  
-
-        ---
-      - ~~~
-        itemLifeSpan
-        ~~~     
-          It represents for how many weeks the items are on the shelves. It is used to distinguish between the items that are "valid" and the items that are "old".
-          
-        ---
-      - ~~~
-        runWeeks
-        ~~~      
-          It represents for how many weeks the program runs.
-
-        ---
-      - ~~~
-        newItems
-        ~~~         
-          It is the number of new goods that arrive every week.
-
-        ---  
-      - ~~~
-        startingDate
-        ~~~      
-          It represents the number of days that we added to the current date to have a starting date of the program.
-        
-        ---
 
 In **/project-02-group-01/scripts/library.js** all the features are arrow functions:
 
@@ -153,47 +117,61 @@ In **/project-02-group-01/scripts/library.js** all the features are arrow functi
       This function has two parameters, `start`, a date object that represents the minimum date allowed (inclusive), and `end`, an other date object that represents the maximum date allowed (inclusive). Within the function a new local variable is created called `date`. This variable has a new date object assigned to it which is randomly generated through the use of `start`, `end` and the MATH function `Math.random()` that returns a random number.
 
     ---
-  - Feature 5:
+  - Feature 5: 
     ~~~
-    const createNewItem = (startingDate) => {}
+    const createNewWeek = (startingDate, maxExpDate, itemsNum, index) => {}
     ~~~
-      This function has one parameter, `startingDate`, a date object that represents every week that passes in the program. In the function a new variable is declared: `item`, an object with these properties:
+      This function uses the function `createNewItem()` to create `itemsNum` items object and pushes them inside the global array of the items.
+
+    ---
+  - Feature 6: 
+    ~~~
+    const createCopyGlobalArray = (index) => {}
+    ~~~
+      This function takes as argument `index` that representes the index of the week in the array "globalArrayItems" to deep copy and push into "globalArrayItemsCopy".
+          
+
+    ---
+  - Feature 7: 
+    ~~~
+    const createCopyGlobalArrayFiltered = (index) => {}
+    ~~~
+      This function takes as argument `index` that representes the index of the week in the array "globalArrayItems" to deep copy and push into "globalArrayItemsCopyFiltered".
+
+    ---
+  - Feature 8:
+    ~~~
+    const createNewItem = (startingDate, maxExpDate) => {}
+    ~~~
+      This function has two parameters, `startingDate`, a date object that represents every week that passes in the program, and `maxExpDate` that is the maximum expiration date. In the function a new variable is declared: `item`, an object with these properties:
       - id -> its value, a number, is the returned value from the function `ID()`
       - name -> its value, a string, is the returned value from the function `chooseItem()`
+      - status -> "new" (modified after by another function)
       - expirationDate -> its value, a date object, is calculated using the function `randomDate`. The parameters passed are 
       > startingDate.setDate(startingDate.getDate()-10) as the START. With the getDate method we find the day of the program starting date, and we deduct 10 (a configurated number used to have new items that are already expired). Then with the method setDate() we set the day of the parameter as the value found. 
       > maxExpDate as the END, that is the maximum date allowed, it being the ending date of the program plus a week.
       - check -> its value is -1, because we check its value every time before printing the output of the program, starting from 0
 
     ---
-  - Feature 6:
+  - Feature 9:
     ~~~
-    const changeStatus = (startWeek) => {}
+    const changeStatus = (startWeek, itemLife, week) => {}
     ~~~
       This function is used to change the status of every item in the global array. The possible status are
       - "new", the item has arrived this week
       - "valid", the item is not expired and has been on the shelf for less than N (it is the configuration object property **itemLifeSpan**) weeks
       - "old", the item is not expired but has been on the shelf for more than N weeks
       - "expired", the item has expired (the date is older than the current week date)
-      It has one parameter, `startWeek`, that is a date object indicating the current week in the program (it will be incremented every 7 days in the main.js). In the function there is a for loop that iterate through the global array of items. Inside the loop there is an if statement that checks if the current week in greater than the expiration date of the item (it uses the method `getTime()`). If so, the function changes the status property of the item in "expired". Otherwise, it checks another if statement: if the check property of the item is equal or greater than the number of week a product can stay on the shelves, the status is changed in "old". If the check property is lesser or if it is different than -1, the status is changed in "valid".      
+      The parameters are `startWeek`, that is a date object indicating the current week in the program, `itemLife` that is the number of weeks after which the item should be "old", and `week` that is the global array with the items. In the function there is a for loop that iterate through the global array of items. Inside the loop there is an if statement that checks if the current week in greater than the expiration date of the item (it uses the method `getTime()`). If so, the function changes the status property of the item in "expired". Otherwise, it checks another if statement: if the check property of the item is equal or greater than `itemLife`, the status is changed in "old". If the check property is lesser or if it is different than -1, the status is changed in "valid".      
       At the end the function increments the value of the check property. 
 
     ---
-  - Feature 7:
+  - Feature 10:
     ~~~
-    const removeItem = () => {}
+    const removeItem = (week) => {}
     ~~~
       This function removes an item from the global array, if its status is "old" or "expired". Inside the function there is a for loop used to iterate through the global array. Inside there is an if statement: if the property *status* of every item object is equal to the string "old" or "expired", the function removes it with the *splice* method. Then it sets the value of the variable *i* (used for the statements of the for loop) to -1 to start again from the index 0 of the array.
 
-
-    ---
-
-  - Feature 10:
-    ~~~
-    const paddingDate = (d) => {}
-    ~~~
-      This function pads every date in the program, given a date format in the configuration object. The function has one parameter, the date object to be padded. Inside there is an if statement: if the property "language" of the configuration object is equal to the string "IT", the function declares a new variable, an array of strings, containing the months in Italian. Then it sets a new variable, *days*, as the result of a concatenation: the day of the month of the passed date (sliced to get only the last two digits and concatenated with a string "0" before the number) plus the name of the month (taken from the array), plus the year of the specificied date. 
-      Otherwise, if the property "language" of the configuration object is equal to the string "EN", the function does the same procedure but using an array of the months in English. At the end the function replaces all the empty spaces (if any) with the padding character configurated in the manager object, and it returns the string. 
 
     ---
   - Feature 11:
@@ -208,23 +186,48 @@ In **/project-02-group-01/scripts/library.js** all the features are arrow functi
     ---
   - Feature 12:
     ~~~
-    let print = () => {}
+    const paddingDate = (d, lang) => {}
     ~~~
-    This function prints the supermarket list with all the rules required. It uses the functions:
-    - paddingID()
-    - paddingString()
-    - paddingDate()
-    - check()
-    Inside the function we have used the *map()* method, that calls a defined callback function on each element of the global array of items. So, for each element of the array it checks with if statement the status of every item, to change the colored output with the CSS (more info on the bonus section), and for every if statement it logs the id of the items, padded using the function *paddingID*, and with the CSS style assigned to it (explained in the bonus section), and it concatenates this string with:
-    - the name of every item, padded using the function *paddingString*
-    - the expiration date, padded using the function *paddingDate*
-    - the status, padded using the function *paddingString*
-    - the check of every item, using the function *check* to change the output based on the number of checks
-  
-
-
+      This function pads every date in the program, given a date format in the configuration object and a language (en or it to translate the months). Inside there is an if statement: if the property "language" of the configuration object is equal to the string "IT", the function declares a new variable, an array of strings, containing the months in Italian. Then it sets a new variable, *days*, as the result of a concatenation: the day of the month of the passed date (sliced to get only the last two digits and concatenated with a string "0" before the number) plus the name of the month (taken from the array), plus the year of the specificied date. 
+      Otherwise, if the property "language" of the configuration object is equal to the string "EN", the function does the same procedure but using an array of the months in English. At the end the function replaces all the empty spaces (if any) with the padding character configurated in the manager object, and it returns the string. 
 
     ---
+
+  - Feature 13:
+    ~~~
+    const createTable = (tableClass, index) => {}
+    ~~~
+    This function creates a number of tables/titles based on the number of weeks set in the settings panel.
+    It has two parameters: `tableClass` and `index`. `tableClass` is the HTLM class of the table taken by document.querySelector. The `index` is the index of the week out of the maximum number of weeks. It's used to have a unique id for each table.
+    
+    ---
+  - Feature 14:
+    ~~~
+    const print = (tableClass, lang, week, i) => {}
+    ~~~
+    This function prints the items in the table. It takes four parameters: `tableClass`, `lang`, `week`, `i`.
+    -  `tableClass` is the class of the table; 
+    - `lang` is the language used to pad the date, 
+    - `week` is the week of the global array to be printed 
+    - `i` is the inxed of the table we want to print the array on based on all the selected tables.
+    
+    ---
+  - Feature 15:
+    ~~~
+    const createTitles = (dateWeek, lang, index) => {}
+    ~~~
+    This function prints either the week or "Products filtered" on the selected title. It takes three parameters: `dataWeek`, `lang`, `index`. 
+    - `dataWeek` is the date of the week to be printed on the title;
+    - `lang` is the language used to pad the date;
+    - `index` is the index of the title we want to print on
+    
+    ---
+  - Feature 16:
+    ~~~
+    const changeShowingWeek = (index) => {}
+    ~~~
+    This function  hides all the tables and titles and shows the one of the passed index. It takes one parameter:  `index` that is the index of the table we want to show.
+    
 
 ---
 
